@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Smart — Alkali Metals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12161d;
+  --bg-alt:#171d26;
+  --panel:#1d2430;
+  --card:#232c3a;
+  --card-hi:#293244;
+  --line:#333f52;
+  --text:#eae6da;
+  --text-soft:#9aa5b5;
+  --amber:#e2933f;
+  --amber-dim:#5a4326;
+  --teal:#49b3a6;
+  --teal-dim:#1f4440;
+  --rose:#dd6b7f;
+  --rose-dim:#4a2530;
+  --blue:#6f97e0;
+  --blue-dim:#243354;
+  --radius:10px;
+  font-size:16px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1180px;margin:0 auto;padding:28px 20px 60px;}
+
+/* ---------- Hero ---------- */
+.hero{
+  display:flex;
+  align-items:center;
+  gap:32px;
+  padding:34px 8px 26px;
+  border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.tiles{display:flex;gap:10px;flex-shrink:0;}
+.tile{
+  width:74px;height:74px;
+  background:linear-gradient(160deg,var(--card-hi),var(--card));
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-family:'IBM Plex Mono',monospace;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:6px 8px;
+  position:relative;
+  overflow:hidden;
+}
+.tile::after{
+  content:"";
+  position:absolute;left:0;bottom:0;right:0;height:3px;
+  background:var(--amber);
+}
+.tile .z{font-size:.6rem;color:var(--text-soft);}
+.tile .sym{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600;text-align:center;color:var(--text);line-height:1;}
+.tile .mass{font-size:.6rem;color:var(--text-soft);text-align:right;}
+.hero-text h1{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:2.7rem;
+  margin:0 0 6px;
+  letter-spacing:-0.01em;
+}
+.hero-text p{
+  margin:0;
+  color:var(--text-soft);
+  font-size:1.02rem;
+  max-width:56ch;
+}
+
+/* ---------- Tabs ---------- */
+.tabs{
+  display:flex;
+  gap:4px;
+  margin:26px 0 0;
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;
+}
+.tab-btn{
+  background:none;border:none;
+  color:var(--text-soft);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:.94rem;
+  font-weight:600;
+  padding:12px 18px;
+  cursor:pointer;
+  position:relative;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:color .15s;
+}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--amber);border-bottom-color:var(--amber);}
+
+.tab-panel{display:none;padding-top:30px;animation:fade .25s ease;}
+.tab-panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+h2.panel-title{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:1.6rem;
+  margin:0 0 6px;
+}
+p.panel-sub{color:var(--text-soft);margin:0 0 26px;font-size:.95rem;max-width:64ch;}
+
+/* ---------- Overview ---------- */
+.overview-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:14px;
+}
+.law-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px 18px;
+}
+.law-card .cat{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.68rem;
+  color:var(--amber);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:8px;
+  display:block;
+}
+.law-card p{margin:0;font-size:.92rem;color:var(--text);}
+.law-card p b{color:var(--teal);font-weight:600;}
+
+/* ---------- Diagrams ---------- */
+.diagram-block{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  margin-bottom:22px;
+}
+.diagram-block h3{
+  font-family:'Fraunces',serif;
+  font-size:1.15rem;
+  font-weight:600;
+  margin:0 0 4px;
+}
+.diagram-block .hint{color:var(--text-soft);font-size:.85rem;margin:0 0 16px;}
+.diagram-flex{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+.diagram-info{
+  flex:1;min-width:230px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:14px 16px;
+  font-size:.88rem;
+  min-height:90px;
+}
+.diagram-info .lead{color:var(--amber);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:.78rem;display:block;margin-bottom:6px;}
+svg text{font-family:'IBM Plex Sans',sans-serif;}
+.clickable{cursor:pointer;transition:opacity .15s;}
+.clickable:hover{opacity:.75;}
+
+.pt-row{display:flex;gap:8px;flex-wrap:wrap;}
+.pt-cell{
+  width:64px;height:64px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:6px;
+  font-family:'IBM Plex Mono',monospace;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:5px 7px;cursor:pointer;
+  transition:transform .12s, border-color .12s;
+}
+.pt-cell:hover{transform:translateY(-3px);border-color:var(--amber);}
+.pt-cell.sel{border-color:var(--amber);background:var(--amber-dim);}
+.pt-cell .zz{font-size:.55rem;color:var(--text-soft);}
+.pt-cell .ss{font-family:'Fraunces',serif;font-size:1.15rem;text-align:center;}
+
+.aufbau-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.aufbau-el{
+  padding:6px 10px;border:1px solid var(--line);border-radius:6px;
+  background:var(--card);cursor:pointer;font-size:.8rem;font-family:'IBM Plex Mono',monospace;
+}
+.aufbau-el:hover{border-color:var(--teal);}
+.orbital-boxes{display:flex;gap:5px;flex-wrap:wrap;}
+.orbital-boxes .ob{
+  width:34px;height:30px;border:1px solid var(--line);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;background:var(--bg-alt);color:var(--text-soft);
+}
+.orbital-boxes .ob.filled{background:var(--teal-dim);color:var(--teal);border-color:var(--teal);}
+
+.water-btn{
+  background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);
+  padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem;
+}
+.water-btn:hover{background:var(--blue);color:#0e1420;}
+#water-eq{
+  margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:.95rem;
+  color:var(--teal);opacity:0;transition:opacity .3s;
+}
+#water-eq.show{opacity:1;}
+
+.ion-toggle{display:flex;gap:8px;margin-bottom:16px;}
+.ion-btn{
+  padding:8px 14px;border-radius:6px;border:1px solid var(--line);
+  background:var(--card);color:var(--text-soft);cursor:pointer;font-size:.82rem;font-weight:600;
+}
+.ion-btn.active{border-color:var(--rose);color:var(--rose);background:var(--rose-dim);}
+.ion-circle-wrap{display:flex;align-items:center;gap:34px;}
+.ion-circle{
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--card-hi), var(--card));
+  border:2px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-size:.85rem;
+  transition:width .3s, height .3s;
+}
+
+.window-bar{position:relative;height:34px;border-radius:6px;overflow:hidden;display:flex;margin-bottom:10px;}
+.window-seg{cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-family:'IBM Plex Mono',monospace;color:#0e1420;font-weight:600;transition:filter .15s;}
+.window-seg:hover{filter:brightness(1.12);}
+
+/* ---------- Mini map ---------- */
+.map-wrap{display:grid;grid-template-columns:280px 1fr;gap:20px;}
+@media(max-width:760px){.map-wrap{grid-template-columns:1fr;}}
+.map-list{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:8px;max-height:520px;overflow-y:auto;
+}
+.map-item{
+  display:block;width:100%;text-align:left;background:none;border:none;
+  color:var(--text-soft);padding:10px 12px;border-radius:6px;cursor:pointer;
+  font-size:.87rem;font-family:'IBM Plex Sans',sans-serif;
+}
+.map-item:hover{background:var(--card);color:var(--text);}
+.map-item.active{background:var(--amber-dim);color:var(--amber);font-weight:600;}
+.map-display{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;min-height:420px;
+}
+.map-display h3{
+  font-family:'Fraunces',serif;font-size:1.3rem;margin:0 0 14px;color:var(--amber);
+}
+.map-display p{font-size:.94rem;color:var(--text);margin:0 0 10px;}
+.map-display .placeholder{color:var(--text-soft);font-size:.9rem;}
+
+/* ---------- Difficulty level tabs (Flash Cards & Quiz Bank) ---------- */
+.lvl-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.lvl-btn{
+  padding:8px 16px;border-radius:20px;border:1px solid var(--line);
+  background:var(--card);color:var(--text-soft);font-size:.82rem;cursor:pointer;font-weight:700;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+.lvl-btn[data-lvl="1"].active{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+.lvl-btn[data-lvl="2"].active{background:var(--amber-dim);border-color:var(--amber);color:var(--amber);}
+.lvl-btn[data-lvl="3"].active{background:var(--rose-dim);border-color:var(--rose);color:var(--rose);}
+.lvl-count{color:var(--text-soft);font-size:.8rem;margin:0 0 18px;font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- Flash cards ---------- */
+.fc-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.fc-chip{
+  padding:6px 13px;border-radius:20px;border:1px solid var(--line);
+  background:var(--card);color:var(--text-soft);font-size:.78rem;cursor:pointer;font-weight:600;
+}
+.fc-chip.active{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+.fc-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;
+}
+.fc-card{
+  perspective:1000px;height:150px;cursor:pointer;
+}
+.fc-inner{
+  position:relative;width:100%;height:100%;transition:transform .5s;
+  transform-style:preserve-3d;
+}
+.fc-card.flip .fc-inner{transform:rotateY(180deg);}
+.fc-face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border-radius:var(--radius);border:1px solid var(--line);
+  padding:16px;display:flex;flex-direction:column;justify-content:center;
+}
+.fc-front{background:var(--panel);}
+.fc-front .fc-cat{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--amber);text-transform:uppercase;margin-bottom:8px;}
+.fc-front p{margin:0;font-size:.92rem;font-weight:600;}
+.fc-back{background:var(--teal-dim);transform:rotateY(180deg);}
+.fc-back p{margin:0;font-size:.86rem;color:var(--text);}
+
+/* ---------- Quiz ---------- */
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+.quiz-score{
+  font-family:'IBM Plex Mono',monospace;font-size:.85rem;
+  background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 14px;
+}
+.quiz-score b{color:var(--teal);}
+.q-block{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin-bottom:14px;
+}
+.q-num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:.72rem;margin-bottom:6px;}
+.q-text{font-size:.98rem;font-weight:600;margin:0 0 12px;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{
+  text-align:left;background:var(--card);border:1px solid var(--line);border-radius:7px;
+  padding:9px 13px;color:var(--text);cursor:pointer;font-size:.87rem;
+}
+.q-opt:hover{border-color:var(--blue);}
+.q-opt.correct{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+.q-opt.wrong{background:var(--rose-dim);border-color:var(--rose);color:var(--rose);}
+.q-opt[disabled]{cursor:default;}
+.reset-btn{
+  background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber);
+  padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.82rem;
+}
+.reset-btn:hover{background:var(--amber);color:#0e1420;}
+
+/* ---------- Footer ---------- */
+footer{
+  margin-top:50px;padding-top:20px;border-top:1px solid var(--line);
+  text-align:center;color:var(--text-soft);font-size:.8rem;font-family:'IBM Plex Mono',monospace;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="tiles">
+      <div class="tile"><span class="z">3</span><span class="sym">Li</span><span class="mass">6.94</span></div>
+      <div class="tile"><span class="z">11</span><span class="sym">Na</span><span class="mass">22.99</span></div>
+      <div class="tile"><span class="z">19</span><span class="sym">K</span><span class="mass">39.10</span></div>
+    </div>
+    <div class="hero-text">
+      <h1>Study Smart</h1>
+      <p>Alkali metals in inorganic pharmaceutical chemistry — the rules, the reactions, and the clinical facts about lithium, sodium and potassium, built for quick review.</p>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="diagrams">Diagrams</button>
+    <button class="tab-btn" data-tab="minimap">Mini Map</button>
+    <button class="tab-btn" data-tab="flashcards">Flash Cards</button>
+    <button class="tab-btn" data-tab="quiz">Quiz Bank</button>
+  </nav>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview" class="tab-panel active">
+    <h2 class="panel-title">Overview</h2>
+    <p class="panel-sub">The core laws and facts of the topic, stripped to the point.</p>
+    <div class="overview-grid" id="overview-grid"></div>
+  </section>
+
+  <!-- ============ DIAGRAMS ============ -->
+  <section id="diagrams" class="tab-panel">
+    <h2 class="panel-title">Diagrams</h2>
+    <p class="panel-sub">Click on anything highlighted to explore it.</p>
+
+    <div class="diagram-block">
+      <h3>Atomic structure</h3>
+      <p class="hint">Click a particle to see what it does.</p>
+      <div class="diagram-flex">
+        <svg width="260" height="230" viewBox="0 0 260 230">
+          <circle cx="130" cy="120" r="95" fill="none" stroke="#333f52" stroke-width="1"/>
+          <circle id="p-part" class="clickable" cx="118" cy="120" r="16" fill="#e2933f"/>
+          <text x="118" y="125" text-anchor="middle" fill="#12161d" font-size="12" font-weight="700" class="clickable" id="p-label">p+</text>
+          <circle id="n-part" class="clickable" cx="145" cy="128" r="16" fill="#6f97e0"/>
+          <text x="145" y="133" text-anchor="middle" fill="#12161d" font-size="12" font-weight="700" class="clickable" id="n-label">n</text>
+          <circle id="e-part" class="clickable" cx="215" cy="55" r="10" fill="#49b3a6"/>
+          <text x="215" y="59" text-anchor="middle" fill="#12161d" font-size="10" font-weight="700" class="clickable" id="e-label">e-</text>
+        </svg>
+        <div class="diagram-info" id="atom-info">
+          <span class="lead">Tap a particle</span>
+          Protons, neutrons and electrons each play a different role in the atom.
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Group 1 — the alkali metals</h3>
+      <p class="hint">Click an element for its configuration and one clinical fact.</p>
+      <div class="pt-row" id="pt-row"></div>
+      <div class="diagram-info" id="pt-info" style="margin-top:14px;">
+        <span class="lead">Select an element</span>
+        Every member of group 1 (except hydrogen) has one electron in its outer shell.
+      </div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Building an electron configuration</h3>
+      <p class="hint">Pick an element to fill its orbitals following the Aufbau order: 1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p &lt; 4s.</p>
+      <div class="aufbau-row" id="aufbau-row"></div>
+      <div class="orbital-boxes" id="orbital-boxes"></div>
+      <div class="diagram-info" id="aufbau-info" style="margin-top:14px;">
+        <span class="lead">Configuration</span>
+        —
+      </div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Alkali metal + water</h3>
+      <p class="hint">Click to reveal the reaction.</p>
+      <button class="water-btn" id="water-btn">Drop lithium into water</button>
+      <div id="water-eq">2 Li (s) + 2 H₂O → 2 LiOH + H₂ (g) ↑ — the same pattern applies to Na and K, with reactivity increasing down the group.</div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Cation vs. anion size</h3>
+      <p class="hint">Toggle between the states of a sodium atom.</p>
+      <div class="ion-toggle" id="ion-toggle">
+        <button class="ion-btn active" data-state="atom">Na atom</button>
+        <button class="ion-btn" data-state="cation">Na⁺ (lost e⁻)</button>
+      </div>
+      <div class="ion-circle-wrap">
+        <div class="ion-circle" id="ion-circle" style="width:120px;height:120px;">Na</div>
+        <div class="diagram-info" id="ion-info">A cation is always smaller than the atom it came from; an anion is always larger.</div>
+      </div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Therapeutic windows: lithium &amp; potassium</h3>
+      <p class="hint">Click a zone of each bar to see what happens there.</p>
+      <p style="font-size:.82rem;color:var(--text-soft);margin:0 0 6px;">Lithium (plasma, mmol/L)</p>
+      <div class="window-bar" id="li-bar"></div>
+      <p style="font-size:.82rem;color:var(--text-soft);margin:14px 0 6px;">Potassium (plasma, mmol/L)</p>
+      <div class="window-bar" id="k-bar"></div>
+      <div class="diagram-info" id="window-info" style="margin-top:6px;">Select a zone above.</div>
+    </div>
+  </section>
+
+  <!-- ============ MINI MAP ============ -->
+  <section id="minimap" class="tab-panel">
+    <h2 class="panel-title">Mini Map</h2>
+    <p class="panel-sub">Click a title on the left — its text appears on the right, in this same section.</p>
+    <div class="map-wrap">
+      <div class="map-list" id="map-list"></div>
+      <div class="map-display" id="map-display">
+        <p class="placeholder">Choose a topic from the list to read it here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLASH CARDS ============ -->
+  <section id="flashcards" class="tab-panel">
+    <h2 class="panel-title">Flash Cards</h2>
+    <p class="panel-sub">Click a card to flip it. Choose a difficulty level, then filter by topic.</p>
+    <div class="lvl-tabs" id="fc-lvl-tabs">
+      <button class="lvl-btn active" data-lvl="1">Level 1 — Easy (60)</button>
+      <button class="lvl-btn" data-lvl="2">Level 2 — Medium (50)</button>
+      <button class="lvl-btn" data-lvl="3">Level 3 — Hard (40)</button>
+    </div>
+    <div class="fc-filters" id="fc-filters"></div>
+    <div class="fc-grid" id="fc-grid"></div>
+  </section>
+
+  <!-- ============ QUIZ BANK ============ -->
+  <section id="quiz" class="tab-panel">
+    <h2 class="panel-title">Quiz Bank</h2>
+    <p class="panel-sub">Pick an answer for each question. Choose a difficulty level — options are shuffled whenever the quiz (re)loads.</p>
+    <div class="lvl-tabs" id="quiz-lvl-tabs">
+      <button class="lvl-btn active" data-lvl="1">Level 1 — Easy (60)</button>
+      <button class="lvl-btn" data-lvl="2">Level 2 — Medium (50)</button>
+      <button class="lvl-btn" data-lvl="3">Level 3 — Hard (40)</button>
+    </div>
+    <div class="quiz-top">
+      <div class="quiz-score">Score: <b id="score-val">0</b> / <span id="score-total">0</span></div>
+      <button class="reset-btn" id="quiz-reset">Reset quiz</button>
+    </div>
+    <div id="quiz-list"></div>
+  </section>
+
+  <footer>© Anmar Taha</footer>
+</div>
+
+<script>
+/* ============ TAB SWITCHING ============ */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============ OVERVIEW DATA ============ */
+const laws = [
+ {cat:"Atomic structure", html:"The nucleus holds <b>protons (+)</b> and <b>neutrons (0)</b>; electrons (−) sit in orbitals around it."},
+ {cat:"Atomic structure", html:"<b>Atomic number</b> = number of protons. <b>Mass number</b> = protons + neutrons."},
+ {cat:"Atomic structure", html:"In a neutral atom, <b>electrons = protons</b>."},
+ {cat:"Electron configuration", html:"Orbitals fill in order: <b>1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p...</b> (Aufbau principle)."},
+ {cat:"Electron configuration", html:"Max electrons: <b>s = 2, p = 6, d = 10, f = 14</b>."},
+ {cat:"Electron configuration", html:"<b>Valence electrons</b> are the electrons in the outermost shell."},
+ {cat:"Ionization", html:"Gaining an electron → <b>anion</b> (negative, larger than the atom). Losing an electron → <b>cation</b> (positive, smaller than the atom)."},
+ {cat:"Periodic law", html:"Proposed independently (1868–1870) by <b>Mendeleeff</b> and <b>Lothar Meyer</b>: properties repeat periodically with increasing atomic number."},
+ {cat:"Alkali metals", html:"Group 1 elements except hydrogen: <b>Li, Na, K, Rb, Cs, Fr</b> — all s-block, one valence electron, form <b>M⁺</b>."},
+ {cat:"Alkali metals", html:"Silvery white except <b>caesium (golden yellow)</b>. Soft, and reactivity/softness <b>increase down the group</b>."},
+ {cat:"Alkali metals", html:"React violently with water: <b>2M + 2H₂O → 2MOH + H₂↑</b>."},
+ {cat:"Alkali metals", html:"Pure metals aren't used pharmaceutically (too reactive in water) — their <b>halides, oxides, carbonates, citrates and salts</b> are what matter medicinally."},
+ {cat:"Lithium", html:"Lithium carbonate (<b>Li₂CO₃</b>) or lithium citrate treats <b>bipolar disorder and recurrent depression</b>, up to 30 mmol/day."},
+ {cat:"Lithium", html:"Li₂CO₃ is preferred — <b>least stomach irritation</b>."},
+ {cat:"Lithium", html:"Narrow therapeutic window: toxicity above <b>1.5 mmol/L</b> (tremor, renal impairment, convulsion); <b>&gt;2 mmol/L</b> = emergency, can be fatal."},
+ {cat:"Lithium", html:"NSAIDs reduce lithium clearance; diuretics cause sodium loss — <b>both worsen lithium toxicity</b>."},
+ {cat:"Sodium", html:"Na⁺ is the most abundant <b>extracellular</b> cation, over 90% of plasma/interstitial ions; kidneys regulate it via the nephron."},
+ {cat:"Sodium", html:"The Na⁺/K⁺ pump builds the electrical potential needed for <b>nerve impulse transmission</b>."},
+ {cat:"Sodium", html:"NaCl treats dehydration and sodium depletion; <b>sodium bicarbonate</b> corrects plasma pH (its active part is the bicarbonate anion)."},
+ {cat:"Sodium", html:"Adult NaCl intake should stay under <b>6 g/day</b>. Low Na⁺ = hyponatremia; high Na⁺ = hypernatremia (linked to hypertension)."},
+ {cat:"Potassium", html:"95% of body K⁺ is <b>inside cells</b>, 5% in plasma — balance kept by the Na⁺/K⁺ pump."},
+ {cat:"Potassium", html:"<b>Hypokalemia</b>: low plasma K⁺ from GI loss (vomiting/diarrhea) or loop/thiazide diuretics; potassium-sparing diuretics avoid this."},
+ {cat:"Potassium", html:"<b>KCl</b> is the preferred liquid potassium salt; supplement pills are capped near <b>100 mg K⁺</b> to protect the gastric mucosa."},
+ {cat:"Potassium", html:"Normal plasma window: <b>3.5–5.0 mmol/L</b>. Severe hyperkalaemia (&gt;6.5 mmol/L or ECG change) can cause <b>cardiac arrest</b>."},
+ {cat:"Potassium", html:"Hyperkalaemia treatment: <b>IV calcium gluconate</b> (protects heart), <b>IV insulin</b> (shifts K⁺ into cells), diuretics, dialysis, or ion-exchange resins."},
+];
+const ovGrid = document.getElementById('overview-grid');
+laws.forEach(l=>{
+  const d = document.createElement('div');
+  d.className='law-card';
+  d.innerHTML = `<span class="cat">${l.cat}</span><p>${l.html}</p>`;
+  ovGrid.appendChild(d);
+});
+
+/* ============ DIAGRAM 1: ATOM ============ */
+const atomInfo = document.getElementById('atom-info');
+const atomFacts = {
+  p: "<span class='lead'>Proton</span>Positively charged. Its count fixes the atomic number — the identity of the element.",
+  n: "<span class='lead'>Neutron</span>Uncharged. Its count varies between isotopes of the same element.",
+  e: "<span class='lead'>Electron</span>Negatively charged, found in the orbitals around the nucleus. Gaining or losing electrons is what creates ions."
+};
+['p','n','e'].forEach(id=>{
+  document.getElementById(id+'-part').addEventListener('click',()=>atomInfo.innerHTML=atomFacts[id]);
+  document.getElementById(id+'-label').addEventListener('click',()=>atomInfo.innerHTML=atomFacts[id]);
+});
+
+/* ============ DIAGRAM 2: GROUP 1 STRIP ============ */
+const group1 = [
+  {z:3, sym:"Li", mass:"6.94", config:"1s² 2s¹", fact:"Used as Li₂CO₃/citrate for bipolar disorder."},
+  {z:11, sym:"Na", mass:"22.99", config:"1s² 2s² 2p⁶ 3s¹", fact:"Most abundant extracellular cation; NaCl treats dehydration."},
+  {z:19, sym:"K", mass:"39.10", config:"[Ar] 4s¹", fact:"95% intracellular; KCl treats potassium depletion."},
+  {z:37, sym:"Rb", mass:"85.47", config:"[Kr] 5s¹", fact:"Rarely used clinically compared with Li, Na, K."},
+  {z:55, sym:"Cs", mass:"132.91", config:"[Xe] 6s¹", fact:"The only alkali metal that is golden yellow, not silvery."},
+  {z:87, sym:"Fr", mass:"(223)", config:"[Rn] 7s¹", fact:"Extremely rare and radioactive; no pharmaceutical use."},
+];
+const ptRow = document.getElementById('pt-row');
+const ptInfo = document.getElementById('pt-info');
+group1.forEach(el=>{
+  const c = document.createElement('div');
+  c.className='pt-cell';
+  c.innerHTML = `<span class="zz">${el.z}</span><span class="ss">${el.sym}</span><span class="zz" style="text-align:right;">${el.mass}</span>`;
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.pt-cell').forEach(x=>x.classList.remove('sel'));
+    c.classList.add('sel');
+    ptInfo.innerHTML = `<span class="lead">${el.sym} — configuration ${el.config}</span>${el.fact}`;
+  });
+  ptRow.appendChild(c);
+});
+
+/* ============ DIAGRAM 3: AUFBAU BUILDER ============ */
+const aufbauData = {
+  "H (1)":["1s¹"], "He (2)":["1s²"], "Li (3)":["1s²","2s¹"], "Be (4)":["1s²","2s²"],
+  "B (5)":["1s²","2s²","2p¹"], "Na (11)":["1s²","2s²","2p⁶","3s¹"], "K (19)":["1s²","2s²","2p⁶","3s²","3p⁶","4s¹"]
+};
+const aufRow = document.getElementById('aufbau-row');
+const orbBoxes = document.getElementById('orbital-boxes');
+const aufInfo = document.getElementById('aufbau-info');
+function drawConfig(name, parts){
+  orbBoxes.innerHTML='';
+  parts.forEach(p=>{
+    const b=document.createElement('div');
+    b.className='ob filled';
+    b.textContent=p;
+    orbBoxes.appendChild(b);
+  });
+  aufInfo.innerHTML = `<span class="lead">${name}</span>${parts.join(' ')}`;
+}
+Object.keys(aufbauData).forEach(name=>{
+  const btn=document.createElement('div');
+  btn.className='aufbau-el';
+  btn.textContent=name;
+  btn.addEventListener('click',()=>drawConfig(name, aufbauData[name]));
+  aufRow.appendChild(btn);
+});
+drawConfig("Na (11)", aufbauData["Na (11)"]);
+
+/* ============ DIAGRAM 4: WATER REACTION ============ */
+document.getElementById('water-btn').addEventListener('click',()=>{
+  document.getElementById('water-eq').classList.add('show');
+});
+
+/* ============ DIAGRAM 5: ION SIZE ============ */
+const ionCircle = document.getElementById('ion-circle');
+const ionInfo = document.getElementById('ion-info');
+document.querySelectorAll('#ion-toggle .ion-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#ion-toggle .ion-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    if(btn.dataset.state==='atom'){
+      ionCircle.style.width='120px'; ionCircle.style.height='120px';
+      ionCircle.textContent='Na';
+      ionInfo.textContent='Neutral sodium atom: 11 protons, 11 electrons.';
+    } else {
+      ionCircle.style.width='72px'; ionCircle.style.height='72px';
+      ionCircle.textContent='Na⁺';
+      ionInfo.textContent='Sodium cation: lost its single valence electron. 11 protons, 10 electrons — noticeably smaller than the atom.';
+    }
+  });
+});
+
+/* ============ DIAGRAM 6: THERAPEUTIC WINDOWS ============ */
+function buildBar(containerId, segments){
+  const bar = document.getElementById(containerId);
+  const total = segments.reduce((s,seg)=>s+seg.width,0);
+  segments.forEach(seg=>{
+    const d=document.createElement('div');
+    d.className='window-seg';
+    d.style.width = (seg.width/total*100)+'%';
+    d.style.background = seg.color;
+    d.textContent = seg.label;
+    d.addEventListener('click',()=>{
+      document.getElementById('window-info').innerHTML = `<span class="lead">${seg.label}</span>${seg.detail}`;
+    });
+    bar.appendChild(d);
+  });
+}
+buildBar('li-bar',[
+  {width:1.5,color:'#49b3a6',label:'0–1.5 normal',detail:'Therapeutic range for lithium salts used in bipolar disorder / mania.'},
+  {width:0.5,color:'#e2933f',label:'1.5–2.0 toxic',detail:'Tremors, renal impairment, convulsion, memory problems, forgetfulness.'},
+  {width:0.6,color:'#dd6b7f',label:'>2.0 emergency',detail:'Requires emergency treatment — can be fatal.'}
+]);
+buildBar('k-bar',[
+  {width:1.0,color:'#dd6b7f',label:'<3.5 hypokalemia',detail:'Muscle weakness, ECG abnormalities; often from GI loss or loop/thiazide diuretics.'},
+  {width:1.5,color:'#49b3a6',label:'3.5–5.0 normal',detail:'Normal plasma potassium therapeutic window.'},
+  {width:1.5,color:'#e2933f',label:'5.0–6.5 rising',detail:'Elevated potassium — needs monitoring, especially in kidney disease.'},
+  {width:0.8,color:'#dd6b7f',label:'>6.5 severe',detail:'Acute severe hyperkalaemia — risk of cardiac arrest; treat with calcium gluconate, insulin, diuretics, dialysis or resins.'}
+]);
+
+/* ============ MINI MAP ============ */
+const mapTopics = [
+ {t:"Atomic structure", b:"An atom is built from a central nucleus (protons and neutrons) surrounded by orbitals holding electrons. Protons carry a positive charge, neutrons are uncharged, and electrons carry a negative charge."},
+ {t:"The nucleus", b:"The nucleus holds virtually all of the atom's mass. Number of protons = atomic number. Protons + neutrons = mass number (also called the nucleon number)."},
+ {t:"Electrons", b:"Atoms are electrically neutral, so in a neutral atom the number of electrons equals the number of protons."},
+ {t:"Electronic configuration", b:"Electronic configuration is the arrangement of electrons in atomic orbitals, filled in the Aufbau order: 1s < 2s < 2p < 3s < 3p < 4s < 3d < 4p < 5s ... The outermost electrons, beyond the stable core, are the valence electrons."},
+ {t:"Ionization", b:"When an atom gains an electron it becomes negatively charged — an anion, always larger than the original atom. Metal atoms lose electrons to become positively charged cations, always smaller than the original atom."},
+ {t:"The periodic law", b:"Proposed independently around 1868–1870 by the Russian chemist Mendeleeff and the German chemist Lothar Meyer: when elements are arranged in order of increasing atomic number, their physical and chemical properties repeat periodically."},
+ {t:"Alkali metals — identity", b:"Members of group 1 of the periodic table, excluding hydrogen, are the alkali metals: lithium, sodium, potassium, rubidium, caesium and francium. They belong to the s-block, with one electron in their outer shell, and their chemistry is defined by losing that electron to form a monocationic ion M⁺."},
+ {t:"Alkali metals — chemical behavior", b:"They have a silvery white appearance, except caesium which is golden yellow. They are all soft metals that can be cut with a knife, with softness increasing down the group. They are very reactive and oxidise in air, with reactivity increasing down the group, and they react violently with water to form the metal hydroxide and hydrogen gas: 2M + 2H2O → 2MOH + H2."},
+ {t:"Alkali metals — pharmaceutical role", b:"The metals themselves are not directly useable due to their reactive behavior in aqueous media. Instead, alkali metal halides and some oxides, carbonates, citrates and other salts are of medicinal interest. NaCl and KCl solutions are important as oral rehydration salts, and KCl also treats potassium depletion."},
+ {t:"Lithium — advantages of use", b:"Since 1880, lithium salts have been used for the prophylaxis and treatment of mania, and as prophylaxis in bipolar disorder and recurrent depression. It is taken orally, usually as lithium carbonate (Li2CO3) or lithium citrate, with a total dose up to 30 mmol/day. Li2CO3 is preferred because it causes the least stomach irritation."},
+ {t:"Lithium — disadvantages of use", b:"Lithium has a very narrow therapeutic index, so blood level monitoring is essential. Plasma concentrations above 1.5 mmol/L may cause toxic effects — tremors in the fingers, renal impairment, convulsion, memory problems and forgetfulness. Extreme doses can cause nausea and diarrhea, and doses above 2 mmol/L require emergency treatment and can be fatal."},
+ {t:"Lithium — further risks", b:"Lithium use is linked to weight gain and decreased thyroid levels, and can lead to diabetes insipidus with polyuria from kidney damage. NSAIDs reduce lithium clearance by the kidneys, causing toxicity, and diuretics that cause sodium depletion can make lithium toxicity worse and hazardous."},
+ {t:"Sodium — maintenance of body fluids", b:"Sodium is essential for regulating body fluid via osmosis. It accounts for over 90% of ions in plasma and interstitial fluid and is the most abundant cation in the extracellular fluid. The kidneys regulate fluid levels through filtration, secretion and reabsorption of Na+ in the nephrons."},
+ {t:"Sodium — nerve impulses and muscle contraction", b:"Sodium ions build an electrostatic potential across cell membranes, with potassium as the counter-ion, enabling nerve impulse transmission. Na+ also establishes osmotic gradients that control water balance; the kidneys sense drops in blood pressure or Na+ and release hormones such as renin, ADH and atrial natriuretic peptide to restore balance."},
+ {t:"Sodium — drugs, diet and toxicity", b:"Sodium chloride solutions treat sodium depletion and dehydration, usually intravenously, or orally in mild chronic cases with sodium chloride or sodium bicarbonate. Sodium bicarbonate corrects plasma pH imbalances such as renal tubular acidosis — the bicarbonate anion is the active component while Na+ provides solubility and compatibility."},
+ {t:"Sodium — dietary limits and imbalance", b:"Table salt is the main dietary source of NaCl; adult intake should stay under 6 g/day. Hyponatremia (low sodium) causes low blood pressure, dehydration and muscle cramps. Hypernatremia (high sodium) is linked to cardiovascular disorders such as hypertension. Acute toxicity may appear after 500–1000 mg/kg body weight, causing vomiting, GI ulceration, renal damage and a higher risk of kidney stones."},
+ {t:"Potassium — clinical role", b:"95% of the body's potassium is inside cells, with the remaining 5% circulating in plasma. This balance is maintained by the Na+/K+ pump, and imbalances — hypokalemia or hyperkalaemia — can have serious consequences."},
+ {t:"Hypokalemia", b:"A potentially serious condition of low plasma potassium, causing muscle weakness or ECG abnormalities. It can result from reduced intake through GI disturbance (diarrhea, vomiting) or increased excretion through diuresis — loop diuretics and thiazides increase both sodium and potassium excretion, while potassium-sparing diuretics preserve potassium."},
+ {t:"Potassium salts in practice", b:"Potassium salts are preferably given as liquid preparations, with KCl the preferred salt; other salts are used if there is risk of hyperchloremia. Potassium bicarbonate is given orally for chronic acidosis states but must be used carefully given the narrow window for potassium. Potassium citrate is used over-the-counter in the UK to relieve discomfort from mild urinary-tract infections by raising urinary pH, but is avoided with kidney pain, blood in urine, hypertension or diabetes without medical advice."},
+ {t:"Potassium supplements and toxicity risk", b:"Oral potassium tablets or capsules are designed for slow release, since high concentrations of K+ are toxic to tissue and can injure the gastric mucosa; nonprescription supplements are usually restricted to under 100 mg of K+."},
+ {t:"Hyperkalaemia and its treatment", b:"The therapeutic window for plasma potassium is narrow, 3.5–5.0 mmol/L. Potassium salts can cause nausea, vomiting and bowel ulceration. Acute severe hyperkalaemia — plasma potassium above 6.5 mmol/L or ECG changes — can trigger cardiac arrest, needing immediate treatment: IV calcium gluconate to protect the heart, IV soluble insulin to shift potassium into cells, diuretics, dialysis, or ion-exchange resins such as polystyrene sulfonate for milder cases."},
+];
+const mapList = document.getElementById('map-list');
+const mapDisplay = document.getElementById('map-display');
+mapTopics.forEach((topic,i)=>{
+  const b=document.createElement('button');
+  b.className='map-item';
+  b.textContent=topic.t;
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.map-item').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    mapDisplay.innerHTML = `<h3>${topic.t}</h3><p>${topic.b}</p>`;
+  });
+  mapList.appendChild(b);
+});
+
+/* ============ FLASH CARDS ============ */
+const flashcardsByLevel = {"1": [{"cat": "Introduction", "front": "What is the title of this lecture course?", "back": "Inorganic Pharmaceutical Chemistry."}, {"cat": "Introduction", "front": "For which academic stage and semester is this course delivered?", "back": "3rd stage, 1st semester (2025–2026)."}, {"cat": "Introduction", "front": "What does inorganic chemistry study?", "back": "All elements and their compounds except carbon and its compounds (carbon is studied under organic chemistry)."}, {"cat": "Introduction", "front": "What does the term 'Pharmaceutical' refer to?", "back": "Any chemical substance useful in prevention or therapy, or used in preparing a medicament."}, {"cat": "Importance", "front": "Give an example of inorganic substances useful medicinally for their therapeutic purpose.", "back": "Astringents and antimicrobials."}, {"cat": "Importance", "front": "Name two substances useful as pharmaceutical aids.", "back": "Bentonite and talc."}, {"cat": "Importance", "front": "Which group of inorganic pharmaceuticals is used to acidify or alkalinize body fluid?", "back": "Antacids, alkalis, and mineral acids."}, {"cat": "Importance", "front": "Name ions used to replace or replenish normal body fluid content.", "back": "Sodium, potassium, calcium, chloride, phosphate."}, {"cat": "Importance", "front": "Give two examples of catalysts used as reagents in reactions.", "back": "Platinum and nickel."}, {"cat": "Importance", "front": "Which titrant, mentioned in the lecture, is useful in pharmaceutical analysis?", "back": "Potassium permanganate."}, {"cat": "Atomic Structure", "front": "What are the particles that make up an atom called?", "back": "Subatomic particles."}, {"cat": "Atomic Structure", "front": "What charge does a proton carry?", "back": "Positive."}, {"cat": "Atomic Structure", "front": "What charge does a neutron carry?", "back": "None — it is uncharged."}, {"cat": "Atomic Structure", "front": "Where are electrons found in an atom?", "back": "In orbitals (the electron cloud) surrounding the nucleus."}, {"cat": "Atomic Structure", "front": "What are protons and neutrons collectively called?", "back": "Nucleons."}, {"cat": "Atomic Structure", "front": "What does the atomic number of an atom equal?", "back": "The number of protons."}, {"cat": "Atomic Structure", "front": "What does the mass number of an atom equal?", "back": "Protons plus neutrons (also called the nucleon number)."}, {"cat": "Electron Configuration", "front": "What is electronic configuration?", "back": "The arrangement of electrons in an atom, filling the atomic orbitals."}, {"cat": "Electron Configuration", "front": "What determines the identity of an element?", "back": "The number of protons."}, {"cat": "Electron Configuration", "front": "What determines the charge of an atom or ion?", "back": "The number of electrons."}, {"cat": "Electron Configuration", "front": "What determines which isotope an atom is?", "back": "The number of neutrons."}, {"cat": "Electron Configuration", "front": "What is the maximum number of electrons an s orbital can hold?", "back": "2."}, {"cat": "Electron Configuration", "front": "What is the maximum number of electrons a p orbital can hold?", "back": "6."}, {"cat": "Electron Configuration", "front": "What is the maximum number of electrons a d orbital can hold?", "back": "10."}, {"cat": "Ionization", "front": "What is formed when an atom gains an electron?", "back": "An anion (negatively charged)."}, {"cat": "Ionization", "front": "What is formed when a metal atom loses an electron?", "back": "A cation (positively charged)."}, {"cat": "Ionization", "front": "Is a cation larger or smaller than its original atom?", "back": "Always smaller."}, {"cat": "Ionization", "front": "Is an anion larger or smaller than its original atom?", "back": "Always larger."}, {"cat": "Periodic Law", "front": "Who proposed a periodic table of this type around 1868–1870?", "back": "Russian chemist Mendelleeff and German chemist Lothar Meyer, independently."}, {"cat": "Periodic Law", "front": "In what years was this type of periodic table suggested?", "back": "Around 1868–1870."}, {"cat": "Periodic Law", "front": "According to the periodic law, elements are arranged in order of what?", "back": "Increasing atomic number."}, {"cat": "Periodic Law", "front": "What repeats periodically when elements are arranged by increasing atomic number?", "back": "Their physical and chemical properties."}, {"cat": "Alkali Metals", "front": "Which elements are the alkali metals discussed in this lecture?", "back": "Lithium (Li), sodium (Na), and potassium (K)."}, {"cat": "Alkali Metals", "front": "Which group of the periodic table contains the alkali metals?", "back": "Group 1 (excluding hydrogen)."}, {"cat": "Alkali Metals", "front": "Which block of the periodic table do alkali metals belong to?", "back": "The s-block."}, {"cat": "Alkali Metals", "front": "What type of ion do alkali metals characteristically form?", "back": "A monocationic ion, M+."}, {"cat": "Alkali Metals", "front": "What color are alkali metals, and which one is the exception?", "back": "Silvery white; caesium is the exception, being golden yellow."}, {"cat": "Alkali Metals", "front": "Are alkali metals hard or soft?", "back": "Soft — they can be cut with a knife."}, {"cat": "Alkali Metals", "front": "What do alkali metals produce when they react with water?", "back": "The metal hydroxide and hydrogen gas."}, {"cat": "Lithium", "front": "What condition are lithium salts primarily used to treat?", "back": "Bipolar disorder (mania) and recurrent depression."}, {"cat": "Lithium", "front": "Which lithium salt is preferred for oral treatment?", "back": "Lithium carbonate (Li2CO3)."}, {"cat": "Lithium", "front": "Why is Li2CO3 the preferred lithium salt?", "back": "Because it causes the least irritation to the stomach."}, {"cat": "Lithium", "front": "What is the maximum recommended total lithium dose per day?", "back": "Up to 30 mmol/day."}, {"cat": "Lithium", "front": "Above what plasma concentration does lithium become toxic?", "back": "Above 1.5 mmol/L."}, {"cat": "Lithium", "front": "What plasma lithium level requires emergency (potentially fatal) treatment?", "back": "Above 2 mmol/L."}, {"cat": "Lithium", "front": "Since when have lithium salts been used for mania and bipolar disorder?", "back": "Since 1880."}, {"cat": "Sodium", "front": "What percentage of ions in plasma and interstitial fluid does sodium account for?", "back": "Over 90%."}, {"cat": "Sodium", "front": "In which body fluid compartment is sodium the most abundant cation?", "back": "The extracellular fluid."}, {"cat": "Sodium", "front": "Which organ plays the key role in regulating sodium and body fluid levels?", "back": "The kidneys."}, {"cat": "Sodium", "front": "What is the term for abnormally low plasma sodium levels?", "back": "Hyponatremia."}, {"cat": "Sodium", "front": "What is the term for abnormally high plasma sodium levels?", "back": "Hypernatremia."}, {"cat": "Sodium", "front": "What is the daily recommended NaCl intake limit for adults?", "back": "6 g."}, {"cat": "Sodium", "front": "What is the pharmaceutically active component of sodium bicarbonate?", "back": "The bicarbonate anion."}, {"cat": "Potassium", "front": "What percentage of the body's potassium is found inside cells?", "back": "95% (the remaining 5% circulates in plasma)."}, {"cat": "Potassium", "front": "What pump maintains the sodium/potassium balance across cell membranes?", "back": "The Na+/K+ pump."}, {"cat": "Potassium", "front": "What is hypokalemia?", "back": "A condition of low potassium levels in the blood plasma."}, {"cat": "Potassium", "front": "What is hyperkalaemia?", "back": "A condition of increased/high potassium levels in the blood plasma."}, {"cat": "Potassium", "front": "What is the preferred potassium salt for liquid preparations?", "back": "Potassium chloride (KCl)."}, {"cat": "Potassium", "front": "What is the normal therapeutic plasma potassium range?", "back": "3.5–5.0 mmol/L."}, {"cat": "Potassium", "front": "What life-threatening event can severe hyperkalaemia cause?", "back": "Cardiac arrest."}], "2": [{"cat": "Introduction", "front": "Why is carbon excluded from the scope of inorganic chemistry?", "back": "Because carbon and its compounds are studied separately, under organic chemistry."}, {"cat": "Introduction", "front": "Is a substance used only in the lab during manufacturing, and absent from the final product, still 'pharmaceutical'?", "back": "Yes — such substances are still classified as pharmaceuticals."}, {"cat": "Introduction", "front": "Who is the lecturer delivering this course?", "back": "Lecturer Sadeq Jaafer."}, {"cat": "Importance", "front": "Which reducing agent, given as a reagent example, contains lithium?", "back": "Lithium aluminum hydride."}, {"cat": "Importance", "front": "Under which importance category would potassium permanganate be classified?", "back": "Useful in pharmaceutical analysis (as a titrant)."}, {"cat": "Importance", "front": "Under which category would bentonite and talc fall?", "back": "Useful as pharmaceutical aids."}, {"cat": "Importance", "front": "A patient takes an antacid to neutralize excess stomach acid. Which of the six roles of inorganic pharmaceuticals does this represent?", "back": "Changing the reaction of body fluid (to acidify or alkalize)."}, {"cat": "Importance", "front": "A physician prescribes potassium to correct a mineral deficiency. Which role does this illustrate?", "back": "Replacing or replenishing the normal content of body fluids."}, {"cat": "Atomic Structure", "front": "Why is virtually all the mass of an atom concentrated in the nucleus?", "back": "Because electrons weigh so little compared with protons and neutrons."}, {"cat": "Atomic Structure", "front": "Fluorine has mass number 19 and atomic number 9. How many neutrons does it have?", "back": "10 neutrons (19 − 9 = 10)."}, {"cat": "Atomic Structure", "front": "If a chlorine atom has atomic number 17, how many electrons does it have when neutral?", "back": "17 electrons."}, {"cat": "Atomic Structure", "front": "If an oxygen atom (atomic number 8) is neutral, how many electrons must it have?", "back": "8 electrons."}, {"cat": "Atomic Structure", "front": "Why must electrons equal protons in a neutral atom?", "back": "Because atoms are electrically neutral — proton positivity is balanced by electron negativity."}, {"cat": "Atomic Structure", "front": "Is the mass number identical for every atom of a given element?", "back": "Not necessarily — isotopes of the same element can have different mass numbers."}, {"cat": "Electron Configuration", "front": "State the Aufbau filling order of orbitals from 1s up to 4s.", "back": "1s < 2s < 2p < 3s < 3p < 4s."}, {"cat": "Electron Configuration", "front": "Write the full electronic configuration of boron (Z = 5).", "back": "1s² 2s² 2p¹."}, {"cat": "Electron Configuration", "front": "What are valence electrons?", "back": "The electrons in the outermost (last) shell or energy level of an atom."}, {"cat": "Electron Configuration", "front": "What is the shorthand electronic configuration of sodium (Z = 11)?", "back": "[Ne]3s¹ — referencing the last completed shell."}, {"cat": "Electron Configuration", "front": "What is the maximum number of electrons an f orbital can hold?", "back": "14."}, {"cat": "Electron Configuration", "front": "Why is 'all chemistry done at the electronic level,' as stated in the lecture?", "back": "Because reactivity and bonding are governed by how electrons, especially valence electrons, are arranged."}, {"cat": "Ionization", "front": "Why does gaining an electron make an atom negatively charged?", "back": "Because electrons then outnumber protons."}, {"cat": "Ionization", "front": "Which class of elements typically gains electrons to form anions?", "back": "Nonmetal atoms."}, {"cat": "Ionization", "front": "Why does a cation become smaller after losing an electron?", "back": "Less electron-electron repulsion and more protons per remaining electron pull the electron cloud in more tightly."}, {"cat": "Periodic Law", "front": "Did Mendelleeff and Lothar Meyer work together on the periodic table?", "back": "No — they proposed it independently."}, {"cat": "Periodic Law", "front": "What nationality was Lothar Meyer?", "back": "German."}, {"cat": "Periodic Law", "front": "What nationality was Mendelleeff?", "back": "Russian."}, {"cat": "Alkali Metals", "front": "How does the softness of alkali metals change down the group?", "back": "It increases down the group."}, {"cat": "Alkali Metals", "front": "How does the reactivity of alkali metals change down the group?", "back": "It increases down the group."}, {"cat": "Alkali Metals", "front": "Give the shorthand electronic configuration of potassium (Z=19).", "back": "[Ar]4s¹."}, {"cat": "Alkali Metals", "front": "Why do alkali metals belong to the s-block?", "back": "Because they have only one electron in their outer shell."}, {"cat": "Alkali Metals", "front": "Why aren't pure alkali metals used directly as pharmaceuticals?", "back": "Mainly due to their violently reactive behavior in aqueous media."}, {"cat": "Alkali Metals", "front": "Which two alkali metal chloride solutions are important as oral rehydration salts?", "back": "Sodium chloride (NaCl) and potassium chloride (KCl)."}, {"cat": "Lithium", "front": "Besides lithium carbonate, which other lithium salt is used orally?", "back": "Lithium citrate."}, {"cat": "Lithium", "front": "Name three symptoms of lithium toxicity above 1.5 mmol/L.", "back": "Tremors in the fingers, renal impairment, and convulsion."}, {"cat": "Lithium", "front": "What effect can lithium have on the thyroid and body weight?", "back": "It can decrease thyroid levels and cause weight gain."}, {"cat": "Lithium", "front": "What condition, involving excess urination, can lithium therapy cause?", "back": "Diabetes insipidus, with polyuria from kidney damage."}, {"cat": "Lithium", "front": "How do NSAIDs affect lithium therapy?", "back": "They reduce lithium clearance by the kidneys, risking toxicity."}, {"cat": "Lithium", "front": "How can diuretics worsen lithium toxicity?", "back": "By causing sodium depletion, which can make toxicity worse and hazardous."}, {"cat": "Sodium", "front": "Which counter-ion works with Na+ to build the electrostatic potential for nerve impulse transmission?", "back": "Potassium (K+)."}, {"cat": "Sodium", "front": "Name two hormones released by the kidneys in response to drops in blood pressure or sodium.", "back": "Renin and antidiuretic hormone (ADH) (also atrial natriuretic peptide)."}, {"cat": "Sodium", "front": "What are the signs of sodium deficiency (hyponatremia)?", "back": "Low blood pressure, dehydration, and muscle cramps."}, {"cat": "Sodium", "front": "What cardiovascular problem is hypernatremia linked to?", "back": "Hypertension."}, {"cat": "Sodium", "front": "What functional unit of the kidney filters, secretes, and reabsorbs Na+?", "back": "The nephron."}, {"cat": "Sodium", "front": "What role does Na+ play in maintaining water balance?", "back": "It establishes osmotic gradients crucial for controlling water balance."}, {"cat": "Potassium", "front": "Name two symptoms of hypokalemia.", "back": "Muscle weakness and ECG (electrocardiogram) abnormalities."}, {"cat": "Potassium", "front": "Which diuretic classes can cause hypokalemia, and why?", "back": "Loop diuretics and thiazides — they increase sodium secretion for water excretion, but also increase potassium excretion."}, {"cat": "Potassium", "front": "Which diuretics actively preserve potassium, unlike loop diuretics and thiazides?", "back": "Potassium-sparing diuretics."}, {"cat": "Potassium", "front": "What is potassium citrate used to relieve in the UK, as an OTC drug?", "back": "Discomfort from mild urinary-tract infections, by increasing urinary pH."}, {"cat": "Potassium", "front": "Why are nonprescription potassium pills restricted to under 100 mg K+?", "back": "High K+ concentrations are toxic to tissue cells and can injure the gastric mucosa."}, {"cat": "Potassium", "front": "At what plasma potassium concentration (or finding) is acute severe hyperkalaemia defined?", "back": "Above 6.5 mmol/L, or if ECG changes are seen."}], "3": [{"cat": "Introduction", "front": "A processing aid helps granulation during tablet manufacture, then is washed away before packaging. Does it qualify as 'pharmaceutical'? Why?", "back": "Yes — the definition explicitly includes substances used only during preparation that may not appear in the final product."}, {"cat": "Introduction", "front": "Precisely distinguish the scope of inorganic chemistry from organic chemistry as defined in this course.", "back": "Inorganic chemistry covers all elements and compounds except carbon and its compounds; carbon and its compounds are the domain of organic chemistry."}, {"cat": "Importance", "front": "Platinum, nickel, and lithium aluminum hydride all fall under 'reagents to carry out reactions.' What distinguishes catalysts from reducing agents here?", "back": "Platinum and nickel act as catalysts, while lithium aluminum hydride acts as a reducing agent."}, {"cat": "Importance", "front": "Do potassium (fluid replenishment), potassium permanganate (titrant), and lithium aluminum hydride (reagent) share the same importance category?", "back": "No — each represents a different category: body fluid replenishment, pharmaceutical analysis, and reagents, respectively."}, {"cat": "Importance", "front": "An astringent constricts tissue and reduces secretions. Which importance category is this, and what shares it?", "back": "Useful medicinally for therapeutic purpose; antimicrobials share this category."}, {"cat": "Atomic Structure", "front": "An atom has mass number 39 and 20 neutrons. What is its atomic number, and how many electrons does the neutral atom have?", "back": "Atomic number = 39 − 20 = 19; the neutral atom has 19 electrons (this is potassium)."}, {"cat": "Atomic Structure", "front": "Two atoms have the same atomic number but different mass numbers. What are they, and which particle count differs?", "back": "They are isotopes of the same element; they differ in neutron number."}, {"cat": "Atomic Structure", "front": "Why can two neutral atoms have identical proton/electron counts yet different masses?", "back": "Because they are isotopes — differing in neutron number, which adds mass without changing charge."}, {"cat": "Atomic Structure", "front": "Sodium (Z=11) loses one electron to form Na+. Compare its proton and electron counts.", "back": "11 protons but only 10 electrons — one more proton than electrons, giving the net positive charge."}, {"cat": "Electron Configuration", "front": "Which orbital is filled immediately after 4s in the Aufbau rule, and which one after that?", "back": "3d is filled after 4s, followed by 4p."}, {"cat": "Electron Configuration", "front": "Lithium's shorthand configuration is 2s¹. What does this notation reference?", "back": "The last completed orbital shell — the stable 1s² core is omitted, leaving only the electron(s) beyond it."}, {"cat": "Electron Configuration", "front": "Explain why sodium's chemistry is dominated by loss of one electron, given [Ne]3s¹.", "back": "It has only one electron beyond a stable core; losing it gives a full, stable outer shell, forming Na+."}, {"cat": "Electron Configuration", "front": "In the Aufbau order, which orbital is filled after 5s and before 5p?", "back": "4d."}, {"cat": "Electron Configuration", "front": "A student writes potassium's configuration ending in ...3p⁶3d¹. What is the error?", "back": "After 3p, 4s is filled before 3d; the correct configuration is ...3p⁶4s¹ ([Ar]4s¹)."}, {"cat": "Ionization", "front": "Explain, using proton-to-electron ratio, why anions are larger and cations smaller than their parent atoms.", "back": "An anion has more electrons than protons, increasing repulsion and expanding the cloud; a cation has fewer electrons than protons, so the same nuclear charge pulls the smaller cloud in tighter."}, {"cat": "Ionization", "front": "Na loses an electron to form Na+; Cl gains one to form Cl-. Which ion is larger relative to its parent atom?", "back": "Cl- is larger than its parent atom, while Na+ is smaller than its parent atom."}, {"cat": "Ionization", "front": "Does alkali metals forming M+ fit the general ionization rule for metals? Justify.", "back": "Yes — metals lose electrons to form cations, and alkali metals (as metals) form M+ accordingly."}, {"cat": "Periodic Law", "front": "How does the periodic law explain why alkali metals share similar chemistry despite different atomic numbers?", "back": "Properties repeat periodically; elements in the same group recur at regular intervals and share valence-electron arrangements."}, {"cat": "Periodic Law", "front": "Would an element directly below potassium in the same group resemble potassium or chlorine chemically?", "back": "Potassium — the periodic law predicts periodic repetition down a group, not similarity across different groups."}, {"cat": "Alkali Metals", "front": "Write the balanced general reaction of an alkali metal (M) with water.", "back": "2M + 2H2O → 2MOH + H2 (metal hydroxide and hydrogen gas)."}, {"cat": "Alkali Metals", "front": "Name three classes of alkali metal compounds that ARE of medicinal interest.", "back": "Halides, oxides/carbonates/citrates, and other salts."}, {"cat": "Alkali Metals", "front": "Explain why alkali metal chemistry is characterized by loss of the s electron.", "back": "Each has one electron beyond a stable core; losing it gives a stable noble-gas-like configuration, forming M+."}, {"cat": "Alkali Metals", "front": "Rank Li, Na, and K in order of increasing reactivity with water.", "back": "Lithium < sodium < potassium — reactivity increases down the group."}, {"cat": "Alkali Metals", "front": "Summarize the distinct clinical application area of sodium/potassium salts versus lithium salts.", "back": "Na and K salts mainly treat dehydration and restore mineral balances; lithium salts mainly treat bipolar disorder."}, {"cat": "Lithium", "front": "A patient on lithium starts an NSAID and a diuretic together. Explain the combined risk.", "back": "NSAIDs reduce renal lithium clearance; the diuretic causes sodium depletion, which independently worsens lithium toxicity — together they compound the risk of reaching toxic or fatal levels."}, {"cat": "Lithium", "front": "Why is monitoring blood lithium levels described as essential?", "back": "Lithium has a very narrow therapeutic index — the gap between effective and toxic (>1.5) or fatal (>2 mmol/L) levels is small."}, {"cat": "Lithium", "front": "A long-term lithium patient develops excessive thirst and very large urine volumes. What does this suggest?", "back": "Diabetes insipidus with polyuria, from lithium-induced damage to kidney structures impairing urine concentration."}, {"cat": "Lithium", "front": "Why is sodium depletion particularly dangerous for a patient on lithium?", "back": "It can worsen lithium toxicity, likely because the kidneys handle sodium and lithium similarly."}, {"cat": "Lithium", "front": "Compare the clinical consequence of plasma lithium at 1.7 mmol/L versus 2.5 mmol/L.", "back": "1.7 mmol/L is toxic (tremor, renal impairment, convulsion, memory issues); 2.5 mmol/L exceeds the emergency threshold and needs urgent treatment, as it can be fatal."}, {"cat": "Lithium", "front": "Why is lithium carbonate favored over lithium citrate?", "back": "Both are used orally for the same indications, but lithium carbonate causes the least stomach irritation."}, {"cat": "Sodium", "front": "Explain the kidney defect in renal tubular acidosis and how it disturbs acid-base balance.", "back": "The kidneys either fail to secrete H+ at the distal tubule or fail to recover HCO3- from the filtrate (passive reabsorption proximally, active distally), leading to acid accumulation."}, {"cat": "Sodium", "front": "A patient ingests about 700 mg/kg body weight of NaCl. What symptoms are expected?", "back": "This falls in the acute toxicity range (500–1000 mg/kg); expect vomiting, GI tract ulceration, and renal damage."}, {"cat": "Sodium", "front": "Why is sodium bicarbonate's cation described as responsible for 'solubility and compatibility'?", "back": "The therapeutic action comes from the bicarbonate anion; the sodium cation simply pairs with it to form a soluble, compatible salt."}, {"cat": "Sodium", "front": "Describe the hormonal chain of events when blood pressure and plasma Na+ drop.", "back": "The kidneys sense the drop and release renin, ADH, and atrial natriuretic peptide, controlling blood pressure, osmotic balance, and water retention."}, {"cat": "Sodium", "front": "Why might chronic high dietary salt intake increase kidney stone risk?", "back": "High salt intake is believed to increase the risk of kidney stone formation, related to how the kidneys handle excess sodium."}, {"cat": "Sodium", "front": "For a patient with mild chronic sodium depletion without IV access, what oral options exist, and when is IV preferred?", "back": "Sodium chloride or sodium bicarbonate can be given orally for mild-to-moderate chronic loss; IV is used for more significant depletion and dehydration."}, {"cat": "Potassium", "front": "List the hyperkalaemia treatment options in order of urgency and explain each.", "back": "IV calcium gluconate protects the heart first; IV soluble insulin shifts K+ into cells; diuretics increase renal K+ secretion; dialysis is used if urgent; ion-exchange resins (e.g., polystyrene sulfonate) suit mild-moderate cases with no ECG changes."}, {"cat": "Potassium", "front": "Why would a patient at risk of hyperchloremia be given a potassium salt other than KCl?", "back": "KCl also supplies chloride, which could worsen hyperchloremia; an alternative salt avoids added chloride load."}, {"cat": "Potassium", "front": "Why must oral potassium bicarbonate be evaluated carefully in a patient with reduced kidney function?", "back": "Even small changes in potassium plasma levels can have severe consequences given the narrow safety window."}, {"cat": "Potassium", "front": "Explain why loop diuretics and thiazides cause hypokalemia despite acting primarily on sodium and water.", "back": "They increase Na+ secretion in the nephrons for water excretion, but as a side effect also increase K+ excretion, leading to hypokalemia."}]};
+let fcLevel = "1";
+let activeCat = "All";
+const fcGrid = document.getElementById('fc-grid');
+const fcFilters = document.getElementById('fc-filters');
+
+function buildCategoryChips(){
+  fcFilters.innerHTML = '';
+  const cats = ["All", ...new Set(flashcardsByLevel[fcLevel].map(f=>f.cat))];
+  activeCat = "All";
+  cats.forEach(c=>{
+    const chip=document.createElement('div');
+    chip.className='fc-chip'+(c==="All"?' active':'');
+    chip.textContent=c;
+    chip.addEventListener('click',()=>{
+      activeCat=c;
+      document.querySelectorAll('.fc-chip').forEach(x=>x.classList.remove('active'));
+      chip.classList.add('active');
+      renderCards();
+    });
+    fcFilters.appendChild(chip);
+  });
+}
+
+function renderCards(){
+  fcGrid.innerHTML='';
+  flashcardsByLevel[fcLevel].filter(f=>activeCat==="All"||f.cat===activeCat).forEach(f=>{
+    const card=document.createElement('div');
+    card.className='fc-card';
+    card.innerHTML = `<div class="fc-inner">
+      <div class="fc-face fc-front"><span class="fc-cat">${f.cat}</span><p>${f.front}</p></div>
+      <div class="fc-face fc-back"><p>${f.back}</p></div>
+    </div>`;
+    card.addEventListener('click',()=>card.classList.toggle('flip'));
+    fcGrid.appendChild(card);
+  });
+}
+
+document.querySelectorAll('#fc-lvl-tabs .lvl-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    fcLevel = btn.dataset.lvl;
+    document.querySelectorAll('#fc-lvl-tabs .lvl-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    buildCategoryChips();
+    renderCards();
+  });
+});
+
+buildCategoryChips();
+renderCards();
+
+/* ============ QUIZ BANK ============ */
+const quizByLevel = {"1": [{"cat": "Introduction", "q": "'Inorganic Pharmaceutical Chemistry' is being taught at which stage/semester per the title slide?", "options": ["2nd stage / 2nd semester", "3rd stage / 1st semester 2025-2026", "4th stage / 1st semester", "1st stage / 2nd semester"], "a": 1}, {"cat": "Introduction", "q": "According to the lecture, inorganic chemistry studies:", "options": ["Only carbon compounds", "All elements and compounds except carbon and its compounds", "Only compounds found in living organisms", "Only metallic elements"], "a": 1}, {"cat": "Introduction", "q": "The term 'Pharmaceutical' is used for:", "options": ["Any chemical substance useful in prevention/therapy or in preparing a medicament", "Only substances found in the final drug product", "Only substances derived from plants", "Only substances used in cosmetics"], "a": 0}, {"cat": "Introduction", "q": "A substance used only in the laboratory during preparation, and absent from the final product, is:", "options": ["Not considered pharmaceutical", "Still considered under 'pharmaceuticals'", "Classified as a contaminant", "Classified as a byproduct only"], "a": 1}, {"cat": "Importance", "q": "Astringents and antimicrobials are examples of inorganic pharmaceuticals useful:", "options": ["As pharmaceutical aids", "Medicinally for their therapeutic purpose", "As reagents only", "As titrants only"], "a": 1}, {"cat": "Importance", "q": "Bentonite and talc are examples of inorganic substances useful:", "options": ["As pharmaceutical aids", "As antacids", "As oxidizing agents", "As titrants"], "a": 0}, {"cat": "Importance", "q": "Antacids and mineral acids are used to:", "options": ["Replenish body fluid ions", "Change the reaction (pH) of body fluid", "Act as titrants in analysis", "Act as catalysts"], "a": 1}, {"cat": "Importance", "q": "Sodium, potassium, calcium, chloride, and phosphate are examples of ions useful for:", "options": ["Pharmaceutical analysis", "Replacing/replenishing normal body fluid content", "Acting as catalysts", "Acting as oxidizing agents"], "a": 1}, {"cat": "Importance", "q": "Platinum and nickel are mentioned as examples of:", "options": ["Titrants", "Catalysts used as reagents", "Astringents", "Pharmaceutical aids"], "a": 1}, {"cat": "Importance", "q": "Potassium permanganate is given as an example of a substance useful:", "options": ["As a pharmaceutical aid", "In pharmaceutical analysis (as a titrant)", "As an antacid", "As an oxidizing reagent only"], "a": 1}, {"cat": "Atomic Structure", "q": "The particles making up an atom are called:", "options": ["Molecules", "Subatomic particles", "Isotopes", "Ions"], "a": 1}, {"cat": "Atomic Structure", "q": "Which particle has a positive charge?", "options": ["Electron", "Neutron", "Proton", "Photon"], "a": 2}, {"cat": "Atomic Structure", "q": "Which particle is uncharged?", "options": ["Proton", "Neutron", "Electron", "Cation"], "a": 1}, {"cat": "Atomic Structure", "q": "Electrons are found:", "options": ["In the nucleus", "In orbitals around the nucleus", "Outside the atom entirely", "Fused with protons"], "a": 1}, {"cat": "Atomic Structure", "q": "Protons and neutrons together are known as:", "options": ["Isotopes", "Nucleons", "Valence particles", "Ions"], "a": 1}, {"cat": "Atomic Structure", "q": "The atomic number of an atom equals the number of:", "options": ["Neutrons", "Protons", "Nucleons", "Orbitals"], "a": 1}, {"cat": "Atomic Structure", "q": "The mass number equals:", "options": ["Protons only", "Protons + neutrons", "Neutrons only", "Electrons + protons"], "a": 1}, {"cat": "Electron Configuration", "q": "Electronic configuration describes:", "options": ["The shape of the nucleus", "The arrangement of electrons in atomic orbitals", "The number of neutrons only", "The color of an element"], "a": 1}, {"cat": "Electron Configuration", "q": "The identity of an element is determined by its number of:", "options": ["Neutrons", "Protons", "Electrons only", "Isotopes"], "a": 1}, {"cat": "Electron Configuration", "q": "The charge of an atom/ion is determined by its number of:", "options": ["Protons", "Neutrons", "Electrons", "Nucleons"], "a": 2}, {"cat": "Electron Configuration", "q": "The isotope of an atom is determined by its number of:", "options": ["Protons", "Electrons", "Neutrons", "Valence electrons"], "a": 2}, {"cat": "Electron Configuration", "q": "Maximum electrons an s orbital can hold:", "options": ["2", "6", "8", "10"], "a": 0}, {"cat": "Electron Configuration", "q": "Maximum electrons a p orbital can hold:", "options": ["2", "6", "10", "14"], "a": 1}, {"cat": "Electron Configuration", "q": "Maximum electrons a d orbital can hold:", "options": ["2", "6", "10", "14"], "a": 2}, {"cat": "Ionization", "q": "An atom that gains an electron becomes:", "options": ["A cation", "An anion", "A nucleon", "An isotope"], "a": 1}, {"cat": "Ionization", "q": "A metal atom that loses an electron becomes:", "options": ["An anion", "A cation", "A neutron", "A proton"], "a": 1}, {"cat": "Ionization", "q": "Compared to its original atom, a cation is:", "options": ["Always larger", "Always smaller", "Always the same size", "Unpredictable"], "a": 1}, {"cat": "Ionization", "q": "Compared to its original atom, an anion is:", "options": ["Always smaller", "Always larger", "Always the same size", "Unpredictable"], "a": 1}, {"cat": "Periodic Law", "q": "The periodic table of this type was suggested around:", "options": ["1750-1770", "1868-1870", "1900-1910", "1950-1960"], "a": 1}, {"cat": "Periodic Law", "q": "Which scientists independently proposed this type of periodic table?", "options": ["Bohr and Rutherford", "Mendelleeff and Lothar Meyer", "Dalton and Avogadro", "Curie and Becquerel"], "a": 1}, {"cat": "Periodic Law", "q": "Mendelleeff was of which nationality?", "options": ["German", "Russian", "French", "British"], "a": 1}, {"cat": "Periodic Law", "q": "According to the periodic law, elements are arranged by:", "options": ["Increasing atomic mass only", "Increasing atomic number", "Alphabetical order", "Discovery date"], "a": 1}, {"cat": "Alkali Metals", "q": "The alkali metals discussed in this lecture are:", "options": ["Li, Na, K", "Be, Mg, Ca", "F, Cl, Br", "He, Ne, Ar"], "a": 0}, {"cat": "Alkali Metals", "q": "Alkali metals occupy which group of the periodic table?", "options": ["Group 2", "Group 1 (excluding hydrogen)", "Group 17", "Group 18"], "a": 1}, {"cat": "Alkali Metals", "q": "Alkali metals belong to which block?", "options": ["s-block", "p-block", "d-block", "f-block"], "a": 0}, {"cat": "Alkali Metals", "q": "What ion do alkali metals characteristically form?", "options": ["M2-", "M+", "M2+", "M3+"], "a": 1}, {"cat": "Alkali Metals", "q": "Which alkali metal is golden yellow instead of silvery white?", "options": ["Lithium", "Sodium", "Potassium", "Caesium"], "a": 3}, {"cat": "Alkali Metals", "q": "Are alkali metals hard or soft metals?", "options": ["Very hard", "Soft (can be cut with a knife)", "Brittle only", "Liquid at room temperature"], "a": 1}, {"cat": "Alkali Metals", "q": "Reaction of alkali metals with water produces:", "options": ["Metal oxide and oxygen", "Metal hydroxide and hydrogen gas", "Metal chloride and chlorine", "Metal carbonate and CO2"], "a": 1}, {"cat": "Lithium", "q": "Lithium salts are primarily used to treat:", "options": ["Bacterial infections", "Bipolar disorder (mania) and recurrent depression", "Type 1 diabetes", "Hypertension"], "a": 1}, {"cat": "Lithium", "q": "Which lithium salt is preferred for oral use?", "options": ["Lithium chloride", "Lithium carbonate (Li2CO3)", "Lithium sulfate", "Lithium nitrate"], "a": 1}, {"cat": "Lithium", "q": "Why is Li2CO3 preferred?", "options": ["Cheapest option", "Causes the least stomach irritation", "Fastest acting", "Most soluble"], "a": 1}, {"cat": "Lithium", "q": "Maximum recommended lithium dose per day:", "options": ["3 mmol", "10 mmol", "30 mmol", "100 mmol"], "a": 2}, {"cat": "Lithium", "q": "Lithium becomes toxic above a plasma concentration of:", "options": ["0.5 mmol/L", "1.5 mmol/L", "5 mmol/L", "10 mmol/L"], "a": 1}, {"cat": "Lithium", "q": "A plasma lithium level above 2 mmol/L requires:", "options": ["No action", "A dose increase", "Emergency treatment — can be fatal", "Switching to potassium"], "a": 2}, {"cat": "Lithium", "q": "Lithium salts have been used for mania/BD prophylaxis since:", "options": ["1880", "1950", "2000", "1800"], "a": 0}, {"cat": "Sodium", "q": "Sodium accounts for what portion of ions in plasma and interstitial fluid?", "options": ["Under 10%", "About 50%", "Over 90%", "Exactly 100%"], "a": 2}, {"cat": "Sodium", "q": "Sodium is the most abundant cation in which fluid compartment?", "options": ["Intracellular fluid", "Extracellular fluid", "Cerebrospinal fluid only", "Bone matrix"], "a": 1}, {"cat": "Sodium", "q": "Which organ is central to regulating sodium/body fluid levels?", "options": ["Liver", "Kidneys", "Pancreas", "Spleen"], "a": 1}, {"cat": "Sodium", "q": "Low plasma sodium is called:", "options": ["Hyperkalaemia", "Hypokalemia", "Hyponatremia", "Hypernatremia"], "a": 2}, {"cat": "Sodium", "q": "High plasma sodium is called:", "options": ["Hyponatremia", "Hypernatremia", "Hypokalemia", "Hyperkalaemia"], "a": 1}, {"cat": "Sodium", "q": "Recommended daily NaCl intake for adults:", "options": ["1 g", "6 g", "20 g", "50 g"], "a": 1}, {"cat": "Sodium", "q": "The pharmaceutically active part of sodium bicarbonate is:", "options": ["The sodium cation", "The bicarbonate anion", "The hydroxide ion", "The chloride ion"], "a": 1}, {"cat": "Potassium", "q": "What percentage of body potassium is found inside cells?", "options": ["25%", "50%", "75%", "95%"], "a": 3}, {"cat": "Potassium", "q": "The pump maintaining Na/K balance across membranes is the:", "options": ["Ca2+/Mg2+ pump", "Na+/K+ pump", "H+/K+ pump", "Proton pump"], "a": 1}, {"cat": "Potassium", "q": "Hypokalemia refers to:", "options": ["High plasma potassium", "Low plasma potassium", "High plasma sodium", "Low plasma calcium"], "a": 1}, {"cat": "Potassium", "q": "Hyperkalaemia refers to:", "options": ["Low plasma potassium", "High plasma potassium", "Low plasma sodium", "High plasma calcium"], "a": 1}, {"cat": "Potassium", "q": "The preferred potassium salt for liquid preparations is:", "options": ["Potassium sulfate", "Potassium chloride (KCl)", "Potassium nitrate", "Potassium iodide"], "a": 1}, {"cat": "Potassium", "q": "The normal therapeutic window for plasma potassium is:", "options": ["1.0-2.0 mmol/L", "3.5-5.0 mmol/L", "6.0-8.0 mmol/L", "10-12 mmol/L"], "a": 1}, {"cat": "Potassium", "q": "Severe hyperkalaemia can lead to:", "options": ["Stroke", "Cardiac arrest", "Seizure only", "Liver failure"], "a": 1}], "2": [{"cat": "Introduction", "q": "Why is carbon chemistry excluded from 'inorganic chemistry' as defined in the lecture?", "options": ["Carbon has no compounds", "Carbon and its compounds are studied under organic chemistry", "Carbon is radioactive", "Carbon is not an element"], "a": 1}, {"cat": "Introduction", "q": "Which best fits the course's definition of 'pharmaceutical'?", "options": ["Only substances administered directly to patients", "Substances useful in prevention, therapy, or drug preparation — even if used only during manufacturing", "Only inorganic acids", "Only compounds with a positive charge"], "a": 1}, {"cat": "Introduction", "q": "Who delivers this Inorganic Pharmaceutical Chemistry course, per the title slide?", "options": ["Lecturer Sadeq Jaafer", "An unnamed instructor", "A panel of professors", "Not specified"], "a": 0}, {"cat": "Importance", "q": "Lithium aluminum hydride is listed under which category of inorganic pharmaceutical importance?", "options": ["Reagents (as a reducing agent)", "Pharmaceutical aids", "Titrants", "Astringents"], "a": 0}, {"cat": "Importance", "q": "A drug used to correct low blood potassium best illustrates which importance category?", "options": ["Pharmaceutical analysis", "Replacing/replenishing normal body fluid content", "Reagents to carry out reactions", "Pharmaceutical aids"], "a": 1}, {"cat": "Importance", "q": "Which pair correctly matches category with example?", "options": ["Pharmaceutical aid — potassium permanganate", "Titrant — bentonite", "Pharmaceutical aid — talc", "Reagent — antacid"], "a": 2}, {"cat": "Importance", "q": "A tablet excipient added purely to improve powder flow, with no therapeutic action, best represents:", "options": ["A pharmaceutical aid", "A titrant", "An oxidizing agent", "An astringent"], "a": 0}, {"cat": "Importance", "q": "Giving a patient an alkali to correct excess body acidity demonstrates which role of inorganic pharmaceuticals?", "options": ["Reagents for reactions", "Changing the reaction of body fluid", "Pharmaceutical analysis", "Pharmaceutical aid"], "a": 1}, {"cat": "Atomic Structure", "q": "Virtually all the mass of an atom is concentrated in the nucleus because:", "options": ["Electrons weigh so little", "Protons have no mass", "Neutrons are outside the nucleus", "The nucleus contains electrons too"], "a": 0}, {"cat": "Atomic Structure", "q": "An atom of fluorine has mass number 19 and atomic number 9. How many neutrons?", "options": ["9", "10", "19", "28"], "a": 1}, {"cat": "Atomic Structure", "q": "In a neutral chlorine atom (Z = 17), the number of electrons is:", "options": ["17", "18", "35", "8"], "a": 0}, {"cat": "Atomic Structure", "q": "A neutral oxygen atom (Z = 8) contains how many electrons?", "options": ["6", "8", "16", "18"], "a": 1}, {"cat": "Atomic Structure", "q": "The rule 'electrons = protons' applies to:", "options": ["Only cations", "Only anions", "Neutral atoms", "Only isotopes"], "a": 2}, {"cat": "Atomic Structure", "q": "Isotopes of the same element differ in their number of:", "options": ["Protons", "Electrons", "Neutrons", "Nucleon type"], "a": 2}, {"cat": "Electron Configuration", "q": "The correct Aufbau filling order up to 4s is:", "options": ["1s,2s,2p,3s,3p,4s", "1s,2s,3s,2p,3p,4s", "1s,2p,2s,3p,3s,4s", "2s,1s,2p,3s,3p,4s"], "a": 0}, {"cat": "Electron Configuration", "q": "The full electronic configuration of boron (Z=5) is:", "options": ["1s²2s¹2p²", "1s²2s²2p¹", "1s²2p³", "1s³2s²"], "a": 1}, {"cat": "Electron Configuration", "q": "Valence electrons are:", "options": ["All electrons in an atom", "Electrons in the innermost shell", "Electrons in the outermost (last) shell", "Only electrons in s orbitals"], "a": 2}, {"cat": "Electron Configuration", "q": "The shorthand electronic configuration of sodium (Z=11), referencing its last completed shell, is:", "options": ["1s¹", "2s¹", "3s¹", "4s¹"], "a": 2}, {"cat": "Electron Configuration", "q": "Maximum electrons an f orbital can hold:", "options": ["6", "10", "14", "18"], "a": 2}, {"cat": "Electron Configuration", "q": "Which best explains 'all chemistry is done at the electronic level'?", "options": ["Neutrons determine reactivity", "Chemical bonding/reactivity depend on electron arrangement, especially valence electrons", "Protons directly bond atoms together", "Mass number governs reaction rate"], "a": 1}, {"cat": "Ionization", "q": "An atom becomes negatively charged when:", "options": ["It loses a proton", "It gains an electron so electrons outnumber protons", "It gains a neutron", "It loses an electron"], "a": 1}, {"cat": "Ionization", "q": "Which class of elements typically gains electrons to form anions?", "options": ["Metals", "Nonmetals", "Noble gases only", "Alkali metals only"], "a": 1}, {"cat": "Ionization", "q": "Why is a cation smaller than its parent atom?", "options": ["Fewer electrons relative to protons, tighter attraction on remaining electrons", "More neutrons added to the nucleus", "Loss of a proton reducing nuclear charge", "Gain of an electron increasing repulsion"], "a": 0}, {"cat": "Periodic Law", "q": "Lothar Meyer, who co-proposed the periodic table concept, was:", "options": ["Russian", "German", "American", "Italian"], "a": 1}, {"cat": "Periodic Law", "q": "Did Mendelleeff and Lothar Meyer collaborate directly?", "options": ["Yes, as full research partners", "No, they worked independently", "Yes, but only briefly", "There is no record either way"], "a": 1}, {"cat": "Periodic Law", "q": "What repeats periodically as atomic number increases, per the periodic law?", "options": ["Only atomic mass", "Physical and chemical properties", "Only the number of neutrons", "Nothing repeats"], "a": 1}, {"cat": "Alkali Metals", "q": "How does softness of alkali metals change down the group?", "options": ["Decreases", "Increases", "Stays the same", "Disappears"], "a": 1}, {"cat": "Alkali Metals", "q": "How does reactivity of alkali metals change down the group?", "options": ["Decreases", "Increases", "Stays constant", "Becomes zero"], "a": 1}, {"cat": "Alkali Metals", "q": "Shorthand configuration of potassium (Z=19) is:", "options": ["[Ne]3s¹", "[Ar]4s¹", "[Kr]5s¹", "[Xe]6s¹"], "a": 1}, {"cat": "Alkali Metals", "q": "Alkali metals belong to the s-block because:", "options": ["They have a full outer shell", "They have one electron in their outer shell", "They have 8 valence electrons", "They have no valence electrons"], "a": 1}, {"cat": "Alkali Metals", "q": "Pure alkali metals aren't used directly as pharmaceuticals mainly because:", "options": ["They are too expensive", "They react violently in aqueous media", "They have no biological effects", "They are radioactive"], "a": 1}, {"cat": "Alkali Metals", "q": "Which two alkali metal chloride solutions are important oral rehydration salts?", "options": ["LiCl and NaCl", "NaCl and KCl", "KCl and RbCl", "LiCl and KCl"], "a": 1}, {"cat": "Lithium", "q": "Besides lithium carbonate, which other lithium salt is used orally for BD?", "options": ["Lithium citrate", "Lithium fluoride", "Lithium hydroxide", "Lithium bromide"], "a": 0}, {"cat": "Lithium", "q": "Which is NOT a symptom of lithium toxicity above 1.5 mmol/L?", "options": ["Tremors in the fingers", "Renal impairment", "Convulsion", "Improved memory"], "a": 3}, {"cat": "Lithium", "q": "Long-term lithium use can cause which endocrine/metabolic effects?", "options": ["Weight loss and increased thyroid levels", "Weight gain and decreased thyroid levels", "No metabolic effects", "Hyperthyroidism only"], "a": 1}, {"cat": "Lithium", "q": "Lithium-induced diabetes insipidus is characterized by:", "options": ["Reduced urine output", "Polyuria (excess urine) from kidney damage", "High blood glucose", "Excess thirst only, no urine changes"], "a": 1}, {"cat": "Lithium", "q": "NSAIDs affect lithium therapy by:", "options": ["Increasing lithium excretion, safely", "Reducing renal lithium clearance, raising toxicity risk", "Having no interaction", "Converting lithium to an inactive form"], "a": 1}, {"cat": "Lithium", "q": "Diuretics can worsen lithium toxicity because they cause:", "options": ["Potassium retention", "Sodium depletion", "Calcium excess", "Increased lithium absorption in the gut"], "a": 1}, {"cat": "Sodium", "q": "The counter-ion working with Na+ in nerve impulse transmission is:", "options": ["Ca2+", "K+", "Mg2+", "Cl-"], "a": 1}, {"cat": "Sodium", "q": "Hormones released by kidneys in response to falling BP/Na+ include:", "options": ["Insulin and glucagon", "Renin, ADH, and atrial natriuretic peptide", "Thyroxine and cortisol", "Estrogen and testosterone"], "a": 1}, {"cat": "Sodium", "q": "Symptoms of hyponatremia include:", "options": ["High blood pressure and edema", "Low blood pressure, dehydration, muscle cramps", "Excess urination only", "Weight gain only"], "a": 1}, {"cat": "Sodium", "q": "Hypernatremia is linked to:", "options": ["Hypotension", "Cardiovascular disorders such as hypertension", "Improved kidney function", "Reduced thirst"], "a": 1}, {"cat": "Sodium", "q": "The functional unit of the kidney responsible for handling Na+ is the:", "options": ["Glomerulus only", "Nephron", "Ureter", "Bladder"], "a": 1}, {"cat": "Sodium", "q": "Na+ helps control water balance mainly by:", "options": ["Directly binding water molecules", "Establishing osmotic gradients", "Acting as an enzyme", "Forming hydrogen bonds with proteins"], "a": 1}, {"cat": "Potassium", "q": "Symptoms of hypokalemia include:", "options": ["Muscle weakness and ECG abnormalities", "Improved muscle strength", "High blood pressure only", "Excess thirst only"], "a": 0}, {"cat": "Potassium", "q": "Loop diuretics and thiazides can cause hypokalemia because they:", "options": ["Reduce sodium excretion", "Increase both sodium and potassium excretion in the nephron", "Increase potassium reabsorption", "Have no effect on potassium"], "a": 1}, {"cat": "Potassium", "q": "Which diuretics preserve potassium, unlike loop diuretics and thiazides?", "options": ["Osmotic diuretics", "Potassium-sparing diuretics", "Carbonic anhydrase inhibitors", "Thiazide-like diuretics"], "a": 1}, {"cat": "Potassium", "q": "Potassium citrate is used OTC in the UK to relieve:", "options": ["Migraines", "Discomfort from mild urinary-tract infections", "Common cold symptoms", "Muscle cramps from exercise"], "a": 1}, {"cat": "Potassium", "q": "Nonprescription potassium supplement pills are usually restricted to under:", "options": ["10 mg K+", "100 mg K+", "1000 mg K+", "No restriction"], "a": 1}, {"cat": "Potassium", "q": "Acute severe hyperkalaemia is defined as plasma potassium exceeding:", "options": ["4.0 mmol/L", "5.0 mmol/L", "6.5 mmol/L (or ECG changes)", "9.0 mmol/L"], "a": 2}], "3": [{"cat": "Introduction", "q": "A solvent dissolves reactants during drug synthesis and is fully removed before packaging. Per the lecture's definition, this solvent:", "options": ["Is excluded from 'pharmaceuticals' since it's absent from the final product", "Is still included under 'pharmaceuticals' because it was used during preparation", "Is classified as organic chemistry only", "Cannot be classified without further testing"], "a": 1}, {"cat": "Introduction", "q": "Which statement most precisely reflects the boundary between organic and inorganic chemistry in this course?", "options": ["Inorganic chemistry excludes all elements heavier than carbon", "Inorganic chemistry covers everything except carbon and its compounds, which fall under organic chemistry", "Organic chemistry covers all metals and their salts", "There is no boundary — both terms are interchangeable"], "a": 1}, {"cat": "Importance", "q": "Platinum, nickel, and lithium aluminum hydride all fall under 'reagents to carry out reactions,' but differ in that:", "options": ["Platinum and nickel are titrants, lithium aluminum hydride is a catalyst", "Platinum and nickel act as catalysts, lithium aluminum hydride acts as a reducing agent", "All three act only as oxidizing agents", "None of them are reagents"], "a": 1}, {"cat": "Importance", "q": "Which correctly separates the categories illustrated by potassium (electrolyte), potassium permanganate (titrant), and platinum (catalyst)?", "options": ["All three belong to the same category", "Potassium — fluid replenishment; permanganate — pharmaceutical analysis; platinum — reagent/catalyst", "Potassium — pharmaceutical aid; permanganate — astringent; platinum — antacid", "Potassium — titrant; permanganate — reagent; platinum — pharmaceutical aid"], "a": 1}, {"cat": "Importance", "q": "An astringent used to reduce mucosal secretions falls under which category, sharing it with which example?", "options": ["Pharmaceutical aids, shared with bentonite", "Useful medicinally for therapeutic purpose, shared with antimicrobials", "Reagents, shared with nickel", "Titrants, shared with potassium permanganate"], "a": 1}, {"cat": "Atomic Structure", "q": "An atom has mass number 39 and 20 neutrons. Its atomic number is:", "options": ["19", "20", "39", "59"], "a": 0}, {"cat": "Atomic Structure", "q": "Two atoms of the same element with different mass numbers are called:", "options": ["Cations", "Anions", "Isotopes", "Nucleons"], "a": 2}, {"cat": "Atomic Structure", "q": "Sodium (Z=11) loses one electron to form Na+. Which is correct about the resulting ion?", "options": ["11 protons and 12 electrons", "11 protons and 10 electrons", "10 protons and 11 electrons", "11 protons and 11 electrons, unchanged"], "a": 1}, {"cat": "Atomic Structure", "q": "Which correctly explains why isotopes have different masses but identical chemical behavior?", "options": ["Different proton numbers, same neutron number", "Same proton (and electron) number, different neutron numbers", "Different electron numbers only", "Different groups of the periodic table"], "a": 1}, {"cat": "Electron Configuration", "q": "According to the Aufbau (diagonal) rule, which orbital fills immediately after 4s?", "options": ["4p", "3d", "5s", "4f"], "a": 1}, {"cat": "Electron Configuration", "q": "Lithium's shorthand configuration 2s¹ (full: 1s²2s¹) omits which part?", "options": ["The valence electron", "The stable filled 1s² core", "The 2p subshell", "The nucleus"], "a": 1}, {"cat": "Electron Configuration", "q": "Sodium's configuration [Ne]3s¹ explains its chemistry because:", "options": ["It has 11 valence electrons to lose", "It has one electron beyond a stable core, readily lost to form Na+", "It has a full outer shell already", "It cannot lose any electrons"], "a": 1}, {"cat": "Electron Configuration", "q": "After 5s and before 5p in the Aufbau order comes:", "options": ["3d", "4d", "4f", "6s"], "a": 1}, {"cat": "Electron Configuration", "q": "A configuration for Z=19 is written ending in ...3p⁶3d¹. What is wrong?", "options": ["Nothing — it is correct", "4s should be filled before 3d, giving [Ar]4s¹ instead", "3p should hold 10 electrons", "1s should hold 4 electrons"], "a": 1}, {"cat": "Ionization", "q": "Which best explains why anions are larger than their parent atoms, in terms of proton-electron ratio?", "options": ["More protons than electrons increases attraction, shrinking the ion", "More electrons than protons increases repulsion, expanding the electron cloud", "Equal protons and electrons cause no size change", "Loss of a neutron increases atomic radius"], "a": 1}, {"cat": "Ionization", "q": "Na forms Na+ and Cl forms Cl-. Which is true about their sizes relative to their parent atoms?", "options": ["Both ions are larger than their parent atoms", "Both ions are smaller than their parent atoms", "Na+ is smaller than Na; Cl- is larger than Cl", "Na+ is larger than Na; Cl- is smaller than Cl"], "a": 2}, {"cat": "Ionization", "q": "Alkali metals forming M+ is consistent with the general rule that:", "options": ["Nonmetals lose electrons to form cations", "Metals lose electrons to form cations", "Metals gain electrons to form anions", "Only nonmetals can form ions"], "a": 1}, {"cat": "Periodic Law", "q": "The periodic law helps explain why alkali metals share similar chemistry because:", "options": ["They all have the same atomic mass", "Properties repeat periodically for elements with similar valence-electron arrangements", "They were all discovered in the same year", "They are radioactive elements"], "a": 1}, {"cat": "Periodic Law", "q": "Based on the periodic law, an element directly below potassium in the same group would resemble:", "options": ["Chlorine, more than potassium", "Potassium, more than chlorine", "Neither, since properties don't repeat", "Helium, since noble gases resemble everything"], "a": 1}, {"cat": "Alkali Metals", "q": "The balanced general reaction of an alkali metal M with water is:", "options": ["M + H2O → MOH", "2M + 2H2O → 2MOH + H2", "M + 2H2O → M(OH)2 + H2", "2M + H2O → M2O + H2"], "a": 1}, {"cat": "Alkali Metals", "q": "Which THREE classes of alkali-metal compounds are of medicinal interest, though the metals themselves aren't directly usable?", "options": ["Halides, oxides/carbonates/citrates, and other salts", "Pure metals, oxides, and gases", "Halides, noble gases, and acids only", "Only citrates"], "a": 0}, {"cat": "Alkali Metals", "q": "The loss of the single s-electron by alkali metals to form M+ occurs because:", "options": ["It gives them a full valence shell matching the preceding noble gas", "It makes them heavier", "It converts them into nonmetals", "It has no particular reason"], "a": 0}, {"cat": "Alkali Metals", "q": "Ranking Li, Na, and K by increasing reactivity with water gives:", "options": ["K < Na < Li", "Li < Na < K", "Na < Li < K", "All equally reactive"], "a": 1}, {"cat": "Alkali Metals", "q": "Sodium and potassium salts are mainly used clinically to:", "options": ["Treat bipolar disorder", "Treat dehydration and restore mineral balances", "Act as antibiotics", "Function as anesthetics"], "a": 1}, {"cat": "Lithium", "q": "A bipolar patient on lithium starts an NSAID and a diuretic simultaneously. What is the combined risk?", "options": ["No interaction of concern", "Both increase plasma lithium via reduced clearance and sodium depletion", "Both decrease lithium levels, reducing efficacy", "Only the diuretic matters; NSAIDs are safe with lithium"], "a": 1}, {"cat": "Lithium", "q": "Why is blood level monitoring described as essential during lithium therapy?", "options": ["Lithium has a wide safety margin", "Lithium has a narrow therapeutic index, so toxic levels are easily reached", "Lithium is not absorbed predictably at all", "Monitoring is only needed once at the start"], "a": 1}, {"cat": "Lithium", "q": "A patient on long-term lithium develops excessive thirst and very large urine volumes. This most likely reflects:", "options": ["Diabetes mellitus from pancreatic damage", "Diabetes insipidus from lithium-induced kidney damage", "Normal lithium excretion", "Hyperkalaemia"], "a": 1}, {"cat": "Lithium", "q": "Sodium depletion is dangerous in a lithium-treated patient because:", "options": ["It has no effect on lithium levels", "It can worsen lithium toxicity", "It always causes lithium levels to fall safely", "It converts lithium carbonate into lithium citrate"], "a": 1}, {"cat": "Lithium", "q": "A plasma lithium level of 2.5 mmol/L compared with 1.7 mmol/L indicates:", "options": ["Both are within normal therapeutic range", "1.7 is toxic; 2.5 exceeds the emergency threshold and needs urgent treatment", "2.5 is safer than 1.7", "Neither requires any action"], "a": 1}, {"cat": "Lithium", "q": "Lithium carbonate is generally favored over lithium citrate mainly because:", "options": ["It is more soluble in water", "It causes less gastric irritation", "It has a longer half-life", "It is cheaper to synthesize"], "a": 1}, {"cat": "Sodium", "q": "In renal tubular acidosis, the underlying defect is:", "options": ["Kidneys secrete too much acid", "Kidneys fail to secrete H+ or fail to reabsorb HCO3-, disturbing pH regulation", "Kidneys overproduce bicarbonate", "No renal involvement at all"], "a": 1}, {"cat": "Sodium", "q": "A patient ingests about 700 mg/kg body weight of NaCl. Expected symptoms include:", "options": ["No symptoms expected", "Vomiting, GI ulceration, and renal damage", "Hypoglycemia only", "Improved hydration only"], "a": 1}, {"cat": "Sodium", "q": "The sodium cation in sodium bicarbonate is best described as responsible for:", "options": ["The drug's pH-correcting action", "Solubility and compatibility", "Antimicrobial activity", "Catalytic activity"], "a": 1}, {"cat": "Sodium", "q": "When blood pressure and Na+ concentration drop, the kidneys respond by releasing:", "options": ["Insulin only", "Renin, ADH, and atrial natriuretic peptide", "Cortisol only", "Nothing — no hormonal response occurs"], "a": 1}, {"cat": "Sodium", "q": "High chronic dietary salt intake is linked to increased risk of:", "options": ["Kidney stone formation", "Improved renal filtration", "Lower blood pressure", "Reduced thirst"], "a": 0}, {"cat": "Sodium", "q": "For mild, chronic sodium depletion without IV access, appropriate oral options include:", "options": ["Sodium chloride or sodium bicarbonate", "Potassium permanganate", "Lithium carbonate", "Calcium gluconate"], "a": 0}, {"cat": "Potassium", "q": "In acute severe hyperkalaemia with ECG changes, which treatment is given first to protect the heart?", "options": ["IV soluble insulin", "IV calcium gluconate", "Oral potassium citrate", "Ion-exchange resins"], "a": 1}, {"cat": "Potassium", "q": "A patient at risk of hyperchloremia should preferably avoid which potassium salt?", "options": ["Potassium bicarbonate", "Potassium chloride (KCl)", "Potassium citrate", "Potassium permanganate"], "a": 1}, {"cat": "Potassium", "q": "Oral potassium bicarbonate for chronic acidosis in a patient with impaired kidney function must be used carefully because:", "options": ["It has no clinical effect in renal impairment", "Even small changes in plasma potassium can have severe consequences", "It always causes hypernatremia", "It replaces the need for dialysis"], "a": 1}, {"cat": "Potassium", "q": "Loop diuretics and thiazides cause hypokalemia as a side effect because their primary action is to:", "options": ["Block potassium channels directly", "Increase sodium secretion in the nephron for water excretion, also increasing K+ loss", "Increase potassium reabsorption in the collecting duct", "Inhibit the Na+/K+ pump entirely"], "a": 1}]};
+let quizLevel = "1";
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+let score=0;
+const quizList = document.getElementById('quiz-list');
+
+function renderQuiz(){
+  const quizRaw = quizByLevel[quizLevel];
+  document.getElementById('score-total').textContent = quizRaw.length;
+  quizList.innerHTML='';
+  score=0;
+  document.getElementById('score-val').textContent = score;
+  quizRaw.forEach((item,idx)=>{
+    const correctText = item.options[item.a];
+    const opts = shuffle(item.options.map((text,i)=>({text, correct:i===item.a})));
+    const block = document.createElement('div');
+    block.className='q-block';
+    block.innerHTML = `<div class="q-num">Question ${idx+1} of ${quizRaw.length}</div><p class="q-text">${item.q}</p><div class="q-options"></div>`;
+    const optWrap = block.querySelector('.q-options');
+    opts.forEach(o=>{
+      const b=document.createElement('button');
+      b.className='q-opt';
+      b.textContent=o.text;
+      b.addEventListener('click',()=>{
+        if(b.parentElement.dataset.answered) return;
+        optWrap.dataset.answered='1';
+        Array.from(optWrap.children).forEach(c=>c.disabled=true);
+        if(o.correct){ b.classList.add('correct'); score++; }
+        else {
+          b.classList.add('wrong');
+          Array.from(optWrap.children).find(c=>c.textContent===correctText).classList.add('correct');
+        }
+        document.getElementById('score-val').textContent = score;
+      });
+      optWrap.appendChild(b);
+    });
+    quizList.appendChild(block);
+  });
+}
+document.querySelectorAll('#quiz-lvl-tabs .lvl-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    quizLevel = btn.dataset.lvl;
+    document.querySelectorAll('#quiz-lvl-tabs .lvl-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderQuiz();
+  });
+});
+renderQuiz();
+document.getElementById('quiz-reset').addEventListener('click', renderQuiz);
+</script>
+</body>
+</html>
