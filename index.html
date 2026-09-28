@@ -8,22 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#12161d;
-  --bg-alt:#171d26;
-  --panel:#1d2430;
-  --card:#232c3a;
-  --card-hi:#293244;
-  --line:#333f52;
-  --text:#eae6da;
-  --text-soft:#9aa5b5;
-  --amber:#e2933f;
-  --amber-dim:#5a4326;
-  --teal:#49b3a6;
-  --teal-dim:#1f4440;
-  --rose:#dd6b7f;
-  --rose-dim:#4a2530;
-  --blue:#6f97e0;
-  --blue-dim:#243354;
+  color-scheme:light;
+  --bg:#f7f4ec;
+  --bg-alt:#efebe0;
+  --panel:#ffffff;
+  --card:#f3efe4;
+  --card-hi:#ffffff;
+  --line:#ddd6c6;
+  --text:#1f2733;
+  --text-soft:#5f6b7a;
+  --amber:#b4620c;
+  --amber-dim:#fbe8cf;
+  --teal:#187a6e;
+  --teal-dim:#d8efeb;
+  --rose:#c03a52;
+  --rose-dim:#fbdfe4;
+  --blue:#2d5cc0;
+  --blue-dim:#dde7fa;
   --radius:10px;
   font-size:16px;
 }
@@ -205,7 +206,7 @@ svg text{font-family:'IBM Plex Sans',sans-serif;}
   background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);
   padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem;
 }
-.water-btn:hover{background:var(--blue);color:#0e1420;}
+.water-btn:hover{background:var(--blue);color:#fff;}
 #water-eq{
   margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:.95rem;
   color:var(--teal);opacity:0;transition:opacity .3s;
@@ -323,17 +324,62 @@ svg text{font-family:'IBM Plex Sans',sans-serif;}
   background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber);
   padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.82rem;
 }
-.reset-btn:hover{background:var(--amber);color:#0e1420;}
+.reset-btn:hover{background:var(--amber);color:#fff;}
 
 /* ---------- Footer ---------- */
 footer{
   margin-top:50px;padding-top:20px;border-top:1px solid var(--line);
   text-align:center;color:var(--text-soft);font-size:.8rem;font-family:'IBM Plex Mono',monospace;
 }
+
+/* ---------- Rights bar / footer ---------- */
+.topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 18px;
+  padding:10px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--text-soft);}
+.topbar a,footer a{color:var(--amber);text-decoration:none;font-weight:600;}
+.topbar a:hover,footer a:hover{text-decoration:underline;}
+.topbar .links,footer .links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+footer .rights{color:var(--text);font-weight:600;margin-bottom:8px;font-size:.85rem;}
+footer .credit{margin-top:8px;font-size:.72rem;opacity:.85;}
+
+/* ---------- Topics ---------- */
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.topic-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;}
+.topic-card .num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:.72rem;}
+.topic-card h3{font-family:'Fraunces',serif;margin:0;font-size:1.12rem;}
+.topic-card ul{margin:0;padding-left:18px;font-size:.88rem;color:var(--text);}
+.topic-card li{margin-bottom:3px;}
+.topic-card button{align-self:flex-start;margin-top:auto;background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber);
+  padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.78rem;}
+.topic-card button:hover{background:var(--amber);color:#fff;}
+
+/* ---------- High yield ---------- */
+.hy-h{font-family:'Fraunces',serif;font-size:1.2rem;margin:28px 0 12px;font-weight:600;}
+.hy-h:first-of-type{margin-top:0;}
+.hy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.hy-val{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:8px;padding:12px 14px;}
+.hy-val b{display:block;font-family:'IBM Plex Mono',monospace;font-size:1.15rem;color:var(--amber);margin-bottom:2px;}
+.hy-val span{font-size:.82rem;color:var(--text-soft);}
+.hy-val.li{border-left-color:var(--rose);} .hy-val.li b{color:var(--rose);}
+.hy-val.na{border-left-color:var(--blue);} .hy-val.na b{color:var(--blue);}
+.hy-val.k{border-left-color:var(--teal);} .hy-val.k b{color:var(--teal);}
+.tbl-wrap{overflow-x:auto;}
+table.hy-table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);font-size:.88rem;}
+.hy-table th,.hy-table td{padding:10px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line);}
+.hy-table th{background:var(--card);border-top:none;font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-soft);}
+.hy-table td:first-child{font-weight:700;font-family:'Fraunces',serif;font-size:1rem;}
 </style>
 </head>
 <body>
 <div class="page">
+
+  <div class="topbar">
+    <span>© 2026 Anmar Taha — All rights reserved</span>
+    <span class="links">
+      <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener">Telegram: @AnmarTaha</a>
+      <a href="https://instagram.com/a.za18" target="_blank" rel="noopener">Instagram: a.za18</a>
+    </span>
+  </div>
 
   <div class="hero">
     <div class="tiles">
@@ -349,6 +395,8 @@ footer{
 
   <nav class="tabs">
     <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="topics">Topics</button>
+    <button class="tab-btn" data-tab="highyield">High Yield</button>
     <button class="tab-btn" data-tab="diagrams">Diagrams</button>
     <button class="tab-btn" data-tab="minimap">Mini Map</button>
     <button class="tab-btn" data-tab="flashcards">Flash Cards</button>
@@ -362,6 +410,25 @@ footer{
     <div class="overview-grid" id="overview-grid"></div>
   </section>
 
+  <!-- ============ TOPICS ============ -->
+  <section id="topics" class="tab-panel">
+    <h2 class="panel-title">Topics</h2>
+    <p class="panel-sub">Everything the lecture covers, in order. Open a topic to read it in the Mini Map.</p>
+    <div class="topic-grid" id="topic-grid"></div>
+  </section>
+
+  <!-- ============ HIGH YIELD ============ -->
+  <section id="highyield" class="tab-panel">
+    <h2 class="panel-title">High Yield</h2>
+    <p class="panel-sub">The values and facts most likely to show up in exams. Memorize this tab first.</p>
+    <h3 class="hy-h">Numbers to memorize</h3>
+    <div class="hy-grid" id="hy-vals"></div>
+    <h3 class="hy-h">Li vs Na vs K at a glance</h3>
+    <div class="tbl-wrap"><table class="hy-table" id="hy-table"></table></div>
+    <h3 class="hy-h">Must-know facts &amp; exam traps</h3>
+    <div class="overview-grid" id="hy-facts"></div>
+  </section>
+
   <!-- ============ DIAGRAMS ============ -->
   <section id="diagrams" class="tab-panel">
     <h2 class="panel-title">Diagrams</h2>
@@ -372,7 +439,7 @@ footer{
       <p class="hint">Click a particle to see what it does.</p>
       <div class="diagram-flex">
         <svg width="260" height="230" viewBox="0 0 260 230">
-          <circle cx="130" cy="120" r="95" fill="none" stroke="#333f52" stroke-width="1"/>
+          <circle cx="130" cy="120" r="95" fill="none" stroke="#b9b2a0" stroke-width="1"/>
           <circle id="p-part" class="clickable" cx="118" cy="120" r="16" fill="#e2933f"/>
           <text x="118" y="125" text-anchor="middle" fill="#12161d" font-size="12" font-weight="700" class="clickable" id="p-label">p+</text>
           <circle id="n-part" class="clickable" cx="145" cy="128" r="16" fill="#6f97e0"/>
@@ -480,7 +547,14 @@ footer{
     <div id="quiz-list"></div>
   </section>
 
-  <footer>© Anmar Taha</footer>
+  <footer>
+    <div class="rights">© 2026 Anmar Taha — All rights reserved</div>
+    <div class="links">
+      <a href="https://t.me/AnmarTaha" target="_blank" rel="noopener">Telegram: @AnmarTaha</a>
+      <a href="https://instagram.com/a.za18" target="_blank" rel="noopener">Instagram: a.za18</a>
+    </div>
+    <div class="credit">Study aid based on the lecture slides of Lecturer Sadeq Jaafer — Inorganic Pharmaceutical Chemistry, 3rd stage.</div>
+  </footer>
 </div>
 
 <script>
@@ -791,6 +865,76 @@ document.querySelectorAll('#quiz-lvl-tabs .lvl-btn').forEach(btn=>{
 });
 renderQuiz();
 document.getElementById('quiz-reset').addEventListener('click', renderQuiz);
+/* ============ TOPICS ============ */
+const topics = [
+ {t:"Introduction & importance", pts:["What inorganic chemistry and 'pharmaceutical' mean","Six uses: therapeutic, aids, pH change, fluid replacement, reagents, analysis"], map:null},
+ {t:"Atomic structure", pts:["Protons, neutrons, electrons","Atomic number vs mass number","Neutral atom: e⁻ = p⁺"], map:0},
+ {t:"Electronic configuration", pts:["Aufbau order and max electrons (s, p, d, f)","Shorthand notation and valence electrons"], map:3},
+ {t:"Ionization", pts:["Anion (gain e⁻) vs cation (lose e⁻)","Cations smaller, anions larger"], map:4},
+ {t:"The periodic law", pts:["Mendeleev and Lothar Meyer (1868–1870)","Properties repeat with increasing atomic number"], map:5},
+ {t:"Alkali metals", pts:["Group 1, s-block, form M⁺","Silvery, soft, reactive — increases down the group","React with water: 2M + 2H₂O → 2MOH + H₂","Salts, not metals, are used pharmaceutically"], map:6},
+ {t:"Lithium", pts:["Li₂CO₃ / citrate for bipolar disorder","Narrow therapeutic index, toxicity above 1.5 mmol/L","Side effects and NSAID / diuretic interactions"], map:9},
+ {t:"Sodium", pts:["Body fluids, nerve impulses, muscle contraction","NaCl and NaHCO₃ as drugs","Diet limit, hypo- / hypernatremia, toxicity"], map:12},
+ {t:"Potassium", pts:["95% intracellular, Na⁺/K⁺ pump","Hypokalemia: causes and KCl treatment","Hyperkalaemia: toxicity and treatment"], map:16},
+];
+const topicGrid = document.getElementById('topic-grid');
+topics.forEach((tp,i)=>{
+  const d = document.createElement('div');
+  d.className='topic-card';
+  d.innerHTML = `<span class="num">TOPIC ${String(i+1).padStart(2,'0')}</span><h3>${tp.t}</h3><ul>${tp.pts.map(p=>`<li>${p}</li>`).join('')}</ul>`;
+  if(tp.map!==null){
+    const b = document.createElement('button');
+    b.textContent = 'Read in Mini Map →';
+    b.addEventListener('click',()=>{
+      document.querySelector('.tab-btn[data-tab="minimap"]').click();
+      document.querySelectorAll('.map-item')[tp.map].click();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+    d.appendChild(b);
+  }
+  topicGrid.appendChild(d);
+});
+
+/* ============ HIGH YIELD ============ */
+const hyVals = [
+ {c:'li', v:'> 1.5 mmol/L', l:'Lithium plasma level: toxic (tremor, renal impairment, convulsion)'},
+ {c:'li', v:'> 2 mmol/L', l:'Lithium: emergency, can be fatal'},
+ {c:'li', v:'30 mmol/day', l:'Maximum total lithium dose'},
+ {c:'li', v:'Li₂CO₃', l:'Preferred lithium salt (least stomach irritation)'},
+ {c:'na', v:'6 g/day', l:'Adult NaCl intake limit'},
+ {c:'na', v:'> 90%', l:'Share of plasma / interstitial ions that is sodium'},
+ {c:'na', v:'500–1000 mg/kg', l:'NaCl dose where acute toxicity appears'},
+ {c:'k', v:'95% / 5%', l:'Potassium inside cells / in plasma'},
+ {c:'k', v:'3.5–5.0 mmol/L', l:'Normal plasma potassium window'},
+ {c:'k', v:'> 6.5 mmol/L', l:'Acute severe hyperkalaemia (or ECG changes): cardiac arrest risk'},
+ {c:'k', v:'< 100 mg K⁺', l:'Limit for OTC potassium supplement pills'},
+ {c:'', v:'1868–1870', l:'Periodic table: Mendeleev and Lothar Meyer'},
+ {c:'', v:'2 · 6 · 10 · 14', l:'Max electrons in s · p · d · f'},
+ {c:'', v:'1880', l:'Lithium salts first used for mania / bipolar disorder'},
+];
+document.getElementById('hy-vals').innerHTML = hyVals.map(x=>`<div class="hy-val ${x.c}"><b>${x.v}</b><span>${x.l}</span></div>`).join('');
+
+document.getElementById('hy-table').innerHTML = `
+<thead><tr><th>Ion</th><th>Main use</th><th>Key value</th><th>Main danger</th></tr></thead>
+<tbody>
+<tr><td>Li⁺</td><td>Bipolar disorder, mania, recurrent depression (Li₂CO₃, citrate)</td><td>Toxic &gt; 1.5 mmol/L</td><td>Narrow therapeutic index: tremor, renal impairment, convulsion, diabetes insipidus</td></tr>
+<tr><td>Na⁺</td><td>Dehydration, sodium depletion (NaCl); pH correction (NaHCO₃)</td><td>6 g/day limit</td><td>Hyponatremia (low BP, cramps); hypernatremia (hypertension)</td></tr>
+<tr><td>K⁺</td><td>Hypokalemia (KCl preferred); acidosis (KHCO₃); mild UTI relief (K citrate, UK)</td><td>3.5–5.0 mmol/L</td><td>Hyperkalaemia: ECG changes, cardiac arrest</td></tr>
+</tbody>`;
+
+const hyFacts = [
+ {cat:'Lithium interactions', html:'<b>NSAIDs</b> reduce renal lithium clearance and <b>diuretics</b> cause sodium depletion — both raise the risk of lithium toxicity.'},
+ {cat:'Lithium side effects', html:'Tremor, renal impairment, convulsion, memory problems, <b>weight gain</b>, <b>decreased thyroid levels</b>, and <b>diabetes insipidus</b> (polyuria).'},
+ {cat:'Sodium bicarbonate', html:'Used orally to regulate serum pH (e.g. <b>renal tubular acidosis</b>). The active part is the <b>bicarbonate anion</b>; Na⁺ gives solubility and compatibility.'},
+ {cat:'Sodium', html:'Most abundant <b>extracellular</b> cation; controls extracellular volume. K⁺ is the counter-ion in the Na⁺/K⁺ pump that drives nerve impulses.'},
+ {cat:'Hypokalemia', html:'Weakness and ECG abnormalities. Caused by vomiting / diarrhea or <b>loop diuretics &amp; thiazides</b>. <b>Potassium-sparing</b> diuretics preserve K⁺.'},
+ {cat:'Potassium salts', html:'<b>KCl</b> is the preferred liquid salt; use another salt if the patient risks <b>hyperchloremia</b>. Supplements are slow-release to protect the gastric mucosa.'},
+ {cat:'Potassium citrate (UK, OTC)', html:'Relieves mild UTI discomfort by <b>raising urinary pH</b>. Avoid with kidney pain, blood or pus in urine, hypertension or diabetes.'},
+ {cat:'Hyperkalaemia treatment', html:'<b>IV calcium gluconate</b> (protects the heart), <b>IV insulin</b> (shifts K⁺ into cells), diuretics, dialysis if urgent, <b>polystyrene sulfonate resins</b> for mild–moderate cases without ECG changes.'},
+ {cat:'Alkali metal trends', html:'Softness and reactivity <b>increase down the group</b>. Cs is <b>golden yellow</b>. Reaction with water: <b>2M + 2H₂O → 2MOH + H₂↑</b>.'},
+ {cat:'Ion size', html:'<b>Cation</b> is always smaller than its atom; <b>anion</b> is always larger.'},
+];
+document.getElementById('hy-facts').innerHTML = hyFacts.map(f=>`<div class="law-card"><span class="cat">${f.cat}</span><p>${f.html}</p></div>`).join('');
 </script>
 </body>
 </html>
